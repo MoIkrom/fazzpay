@@ -1,4 +1,8 @@
-.container {
+/* 
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,700&display=swap");
+
+/* .container {
   padding: 0 2rem;
 }
 
@@ -10,18 +14,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.footer {
+/* .footer {
   display: flex;
   flex: 1;
   padding: 2rem 0;
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.footer a {
+/* .footer a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,8 +65,7 @@
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
 .grid {
@@ -127,3 +130,4 @@
     filter: invert(1);
   }
 }
+ */

@@ -1,0 +1,483 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,700&display=swap");
+
+/* *html body {
+  padding: 0;
+  margin: 0;
+} */
+.left-img {
+  display: flex;
+}
+.body {
+  max-width: 1440px;
+  flex: 1;
+}
+.image-left {
+  background-image: url(../../assets/bg-login.png);
+  background-size: cover;
+  /* height: 1280px; */
+  height: 750px;
+}
+
+.images {
+  height: 548px;
+  width: 515px;
+  position: relative;
+  top: 1rem;
+  left: 7rem;
+}
+.cont-image {
+  position: relative;
+  top: 6rem;
+}
+.fazzpay {
+  padding-left: 100px;
+  font-family: Nunito Sans;
+  color: #ffffff;
+}
+
+.title {
+  margin: 0px !important;
+  position: relative;
+  top: 3rem;
+  font-size: 29px;
+  font-weight: 700;
+  line-height: 40px;
+  line-height: 100%;
+}
+
+.title-desc {
+  font-style: Bold;
+  font-size: 24px;
+}
+
+.desc {
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 150%;
+  word-spacing: 2px;
+  width: 38rem;
+}
+.right-cont {
+  padding: 45px 100px 0px 60px;
+}
+.title-form {
+  color: black;
+  padding: 0px;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: bold;
+}
+
+.desc-form {
+  font-family: Nunito Sans;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 30px;
+  line-height: 170%;
+  padding-top: 1rem;
+  fill: Solid;
+  color: rgba(58, 61, 66, 0.6);
+}
+
+.form {
+  padding-top: 3rem;
+}
+.email {
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0px;
+  color: #ced4da;
+}
+.border-input {
+  border-top: none;
+  border-right: none;
+  border-radius: 0px;
+  border-bottom: 1px solid #ced4da;
+  border-left: none;
+  /* margin-bottom: 3rem; */
+}
+
+.border-input:focus {
+  box-shadow: none;
+  background-color: none;
+}
+.login-btn {
+  width: 25rem;
+  padding: 0px;
+  height: 3rem;
+  background-color: #6379f4;
+  font-family: Nunito Sans;
+  font-style: bold;
+  font-size: 18px;
+  line-height: 30px;
+  line-height: 170%;
+  fill: Solid;
+  color: #ffffff;
+  position: relative;
+  top: 1rem;
+}
+
+.login-btn-off {
+  background-color: #dadada52 !important;
+  width: 25rem;
+  padding: 0px;
+  height: 3rem;
+  font-family: Nunito Sans;
+  font-style: bold;
+  font-size: 18px;
+  line-height: 30px;
+  line-height: 170%;
+  fill: Solid;
+  color: #c2c0c067 !important;
+  position: relative;
+  top: 1rem;
+}
+.login-btn-off:hover {
+  background-color: #dadada52 !important;
+  width: 25rem;
+  padding: 0px;
+  height: 3rem;
+  font-family: Nunito Sans;
+  font-style: bold;
+  font-size: 18px;
+  line-height: 30px;
+  line-height: 170%;
+  fill: Solid;
+  color: #c2c0c067 !important;
+  position: relative;
+  top: 1rem;
+  cursor: pointer;
+}
+.login-text-disabled {
+  color: #66626267 !important;
+  font-family: Nunito Sans;
+  font-style: bold;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 30px;
+  line-height: 170%;
+  fill: Solid;
+  margin: 0px;
+}
+.login-btn:hover {
+  width: 27.5rem;
+  background-color: #6379f4;
+}
+.login-text {
+  font-family: Nunito Sans;
+  font-style: bold;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 30px;
+  line-height: 170%;
+  fill: Solid;
+  color: #ffffff;
+  margin: 0px;
+}
+
+.forgot {
+  color: rgba(58, 61, 66, 0.8);
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  top: -10px;
+}
+.sign-up {
+  font-family: Nunito Sans;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 30px;
+  line-height: 170%;
+  fill: Solid;
+  color: rgba(58, 61, 66, 0.6);
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 55px;
+}
+
+.text-sign-up {
+  color: #6379f4;
+}
+.text-sign-up:hover {
+  color: #6379f4;
+  text-decoration: underline;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+  .right-cont {
+    padding: 23px 40px 0px 33px;
+  }
+  .form-control {
+    font-size: 12px;
+  }
+  .login-btn-off {
+    width: 22.5rem;
+  }
+  .login-btn-off:hover {
+    width: 22.5rem;
+  }
+  .forgot {
+    font-size: 12px;
+  }
+
+  .login-btn:hover {
+    width: 22.5rem;
+    background-color: #6379f4;
+  }
+  .images {
+    height: 540px;
+    width: 504px;
+    position: relative;
+    top: 1rem;
+    left: 3rem;
+  }
+  .desc {
+    width: 31rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .right-cont {
+    padding: 50px 33px 0px 33px;
+  }
+  .login-btn-off {
+    width: 15.5rem;
+    position: relative;
+    top: -5px;
+  }
+  .login-btn-off:hover {
+    width: 15.5rem;
+    position: relative;
+    top: -5px;
+  }
+  .title {
+    padding-left: 45px;
+  }
+
+  .login-btn:hover {
+    width: 15.5rem;
+    position: relative;
+    top: -5px;
+    background-color: #6379f4;
+  }
+  .cont-image {
+    position: relative;
+    left: -25px;
+    top: 3rem;
+  }
+  .images {
+    height: 490px;
+    width: 403px;
+    position: relative;
+    top: 3rem;
+    left: 1rem;
+    margin-bottom: 5rem;
+  }
+  .desc {
+    width: 26rem;
+    font-size: 12px;
+  }
+  .desc-form {
+    font-size: 14px;
+  }
+  .form {
+    padding-top: 2rem;
+    margin-bottom: 3rem;
+  }
+  .sign-up {
+    font-size: 13px;
+    position: relative;
+    top: -1rem;
+  }
+  .title-desc {
+    font-size: 21px;
+  }
+  .fazzpay {
+    padding-left: 70px;
+  }
+  .title-form {
+    font-size: 18px;
+    line-height: 147%;
+    padding-left: 0px;
+  }
+  .border-input {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .cont-left {
+    display: flex;
+    flex-direction: column;
+  }
+  .title {
+    padding-left: 20rem;
+  }
+  .image-left {
+    width: 27rem;
+    height: 750px;
+    position: relative;
+    left: -96px;
+  }
+  .right-cont {
+    width: 26rem;
+  }
+  .login-btn-off {
+    position: relative;
+    left: 3rem;
+    top: 1rem;
+    margin-bottom: -15px;
+  }
+  .login-btn-off:hover {
+    position: relative;
+    left: 3rem;
+    top: 1rem;
+    margin-bottom: -15px;
+  }
+  .title {
+    padding-left: 150px !important;
+  }
+
+  .login-btn:hover {
+    position: relative;
+    left: 3rem;
+    top: 1rem;
+    margin-bottom: -15px;
+    background-color: #6379f4;
+  }
+  .cont-image {
+    position: relative;
+    left: -25px;
+    top: 3rem;
+  }
+  .images {
+    height: 416px;
+    width: 368px;
+    position: relative;
+    top: 4rem;
+    left: 24px;
+    margin-bottom: 7rem;
+  }
+  .desc {
+    width: 26rem;
+    font-size: 12px;
+  }
+  .desc-form {
+    font-size: 14px;
+  }
+  .form {
+    padding-top: 2rem;
+    margin-bottom: 3rem;
+  }
+  .sign-up {
+    font-size: 13px;
+    position: relative;
+    top: 1rem;
+    margin-bottom: 2rem;
+  }
+  .title-desc {
+    font-size: 21px;
+    padding-left: 39px;
+    width: 23rem;
+  }
+  .fazzpay {
+    padding-left: 24px;
+  }
+  .title-form {
+    font-size: 18px;
+    line-height: 147%;
+    padding-left: 0px;
+  }
+  .border-input {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .cont-left {
+    display: flex;
+    flex-direction: column;
+  }
+  .image-left {
+    width: 27rem;
+  }
+  .title {
+    padding-left: 20rem;
+  }
+  .right-cont {
+    width: 26rem;
+  }
+  .login-btn-off {
+    position: relative;
+    left: 3rem;
+    top: 1rem;
+    margin-bottom: -15px;
+  }
+  .login-btn-off:hover {
+    position: relative;
+    left: 3rem;
+    top: 1rem;
+    margin-bottom: -15px;
+  }
+  .title {
+    padding-left: 150px !important;
+  }
+
+  .login-btn:hover {
+    position: relative;
+    left: 3rem;
+    top: 1rem;
+    margin-bottom: -15px;
+    background-color: #6379f4;
+  }
+  .cont-image {
+    position: relative;
+    left: -25px;
+    top: 3rem;
+  }
+  .images {
+    height: 416px;
+    width: 368px;
+    position: relative;
+    top: 4rem;
+    left: 24px;
+    margin-bottom: 7rem;
+  }
+  .desc {
+    width: 26rem;
+    font-size: 12px;
+  }
+  .desc-form {
+    font-size: 14px;
+  }
+  .form {
+    padding-top: 2rem;
+    margin-bottom: 3rem;
+  }
+  .sign-up {
+    font-size: 13px;
+    position: relative;
+    top: 1rem;
+  }
+  .title-desc {
+    font-size: 21px;
+    padding-left: 39px;
+    width: 23rem;
+  }
+  .fazzpay {
+    padding-left: 70px;
+    width: 22rem;
+  }
+  .title-form {
+    font-size: 18px;
+    line-height: 147%;
+    padding-left: 0px;
+  }
+  .border-input {
+    font-size: 12px;
+  }
+}
