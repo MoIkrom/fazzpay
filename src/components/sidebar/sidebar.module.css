@@ -1,0 +1,33 @@
+.card {
+  height: 515px;
+  width: 250px;
+  position: relative;
+  top: 100px;
+}
+
+.position {
+  margin-bottom: 0px;
+  font-family: Nunito Sans;
+  font-style: Regular;
+  font-size: 18px;
+  line-height: 31px;
+  line-height: 126%;
+  fill: Solid;
+  color: rgba(58, 61, 66, 0.8);
+  cursor: pointer;
+}
+.cursor {
+  cursor: pointer;
+}
+
+.cont-buttonbar {
+  padding-bottom: 50px;
+}
+.cont-dashboard {
+  padding-top: 25px;
+}
+
+.cont-logout {
+  position: relative;
+  top: 100px;
+}

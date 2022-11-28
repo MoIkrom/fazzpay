@@ -59,6 +59,9 @@
 .right-cont {
   padding: 90px 100px 0px 60px;
 }
+.cont-success-pin {
+  padding: 100px;
+}
 .title-form {
   color: black;
   padding: 0px;
@@ -97,9 +100,11 @@
 .border-input:focus {
   box-shadow: none;
   background-color: none;
+  /* text-align: center;
+  padding-left: 20px; */
 }
 .login-btn {
-  width: 25rem;
+  width: 100%;
   padding: 0px;
   height: 3rem;
   background-color: #6379f4;
@@ -116,7 +121,7 @@
 
 .login-btn-off {
   background-color: #dadada52 !important;
-  width: 25rem;
+  width: 100%;
   padding: 0px;
   height: 3rem;
   font-family: Nunito Sans;
@@ -131,7 +136,7 @@
 }
 .login-btn-off:hover {
   background-color: #dadada52 !important;
-  width: 25rem;
+  width: 100%;
   padding: 0px;
   height: 3rem;
   font-family: Nunito Sans;
@@ -157,7 +162,7 @@
   margin: 0px;
 }
 .login-btn:hover {
-  width: 25rem;
+  width: 100%;
   background-color: #6379f4;
 }
 .login-text {

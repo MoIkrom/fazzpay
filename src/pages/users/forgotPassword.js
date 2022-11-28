@@ -3,7 +3,7 @@ import Layout from "../../components/layout/Layout";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import styles from "../users/forgotPassword.module.css";
+import styles from "../../styles/users/forgotPassword.module.css";
 import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
@@ -16,6 +16,7 @@ function forgotPassword() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
+  const [linkDirect, setLinkDirect] = useState("http://localhost:3000/users/resetPassword");
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -25,22 +26,21 @@ function forgotPassword() {
     e.preventDefault();
 
     axios
-      .post(`https://fazzpay-rose.vercel.app/auth/login`, {
+      .post(`https://fazzpay-rose.vercel.app/auth/forgot-password`, {
         email,
+        linkDirect,
       })
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response);
 
-        localStorage.setItem("token", response.data.data.token);
-        // localStorage.setItem("role", response.data.result.data.role);
-        toast.success("Login success", {
+        toast.success("Please check your Email", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
         });
-        setTimeout(() => router.push("/home/home"), 3000);
+        setTimeout(() => router.push("/users/resetPassword"), 3000);
       })
       .catch((err) => {
-        toast.error("Email/password is wrong", {
+        toast.error("Email is wrong", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
         });
@@ -69,9 +69,6 @@ function forgotPassword() {
           <h2 className={`${styles["fazzpay"]} ${styles["title-form"]}`}>Did You Forgot Your Password? Don’t Worry, You Can Reset Your Password In a Minutes.</h2>
           <p className={`${styles["desc-form"]}`}>To reset your password, you must type your e-mail and we will send a link to your email and you will be directed to the reset password screens.</p>
           <form className={`${styles["form"]}`} onSubmit={submitHandler}>
-            {/* <div className="mb-3">
-            <input type="email" className={`form-control ${styles["border-input"]} `} id="exampleInputEmail1" placeholder="Enter your e-mail" aria-describedby="emailHelp " />
-          </div> */}
             <div className="input-group flex-nowrap mb-3">
               <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                 <i className={`bi bi-envelope ${styles["addon-wrapping"]}`}></i>

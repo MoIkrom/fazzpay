@@ -1,0 +1,32 @@
+.cont-right {
+  position: relative;
+  top: 100px;
+}
+
+.cards {
+  height: 515px;
+}
+.button {
+  width: 150px;
+  height: 45px;
+}
+
+.profile-picture {
+  border-radius: 0px;
+  width: 100px;
+  height: 100px;
+}
+.cursor {
+  cursor: pointer;
+}
+.No-Hp {
+  margin-bottom: 30px;
+}
+.card-information {
+  flex-direction: row;
+  width: 250px;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 20px;
+}

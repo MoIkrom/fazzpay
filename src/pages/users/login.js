@@ -3,7 +3,7 @@ import Layout from "../../components/layout/Layout";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import styles from "../users/login.module.css";
+import styles from "../../styles/users/login.module.css";
 import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
@@ -14,8 +14,6 @@ import hp from "../../assets/phone-login.png";
 
 function Login() {
   const router = useRouter();
-  // const { pid } = router.query;
-  // const [body, setBody] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPwdshown, setIsPwdShown] = useState(false);
@@ -43,12 +41,14 @@ function Login() {
         console.log(response.data.data);
 
         localStorage.setItem("token", response.data.data.token);
-        // localStorage.setItem("role", response.data.result.data.role);
+        localStorage.setItem("id", response.data.data.id);
+        // localStorage.setItem("pin", response.data.data.pin);
         toast.success("Login success", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
         });
-        setTimeout(() => router.push("/home/home"), 3000);
+
+        setTimeout(() => (response.data.data.pin === null ? router.push("/users/pin") : router.push("/home")), 3000);
       })
       .catch((err) => {
         toast.error("Email/password is wrong", {
@@ -80,9 +80,6 @@ function Login() {
           <h2 className={`${styles["fazzpay"]} ${styles["title-form"]}`}>Start Accessing Banking Needs With All Devices and All Platforms With 30.000+ Users</h2>
           <p className={`${styles["desc-form"]}`}>Transfering money is eassier than ever, you can access FazzPay wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
           <form className={`${styles["form"]}`} onSubmit={submitHandler}>
-            {/* <div className="mb-3">
-            <input type="email" className={`form-control ${styles["border-input"]} `} id="exampleInputEmail1" placeholder="Enter your e-mail" aria-describedby="emailHelp " />
-          </div> */}
             <div className="input-group flex-nowrap mb-3">
               <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                 <i className={`bi bi-envelope ${styles["addon-wrapping"]}`}></i>
@@ -95,7 +92,7 @@ function Login() {
               </span>
               <input type={isPwdshown ? "text" : "password"} className={`form-control ${styles["border-input"]} `} placeholder="Enter your password" onChange={handlePassword} />
               <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
-                {isPwdshown ? <i className={` bi bi-eye ${styles["cursor"]}`} onClick={togglePassword}></i> : <i className={` bi bi-eye-slash ${styles["cursor"]}`} onClick={togglePassword}></i>}
+                {isPwdshown ? <i className={` bi bi-eye ${styles["eyeslash"]} ${styles["cursor"]}`} onClick={togglePassword}></i> : <i className={` bi bi-eye-slash ${styles["eyeslash"]} ${styles["cursor"]}`} onClick={togglePassword}></i>}
               </span>
             </div>
             <div className="mb-3 form-check">

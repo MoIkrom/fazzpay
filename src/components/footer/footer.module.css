@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,700&display=swap");
+
+.cont-footer {
+  background-color: #6379f4;
+  height: 50px;
+}
+
+.weight-1 {
+  font-size: 16px;
+  font-weight: 400;
+}
+.weight-2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.font {
+  font-family: Nunito Sans;
+  font-style: Regular;
+  line-height: 28px;
+  line-height: 128%;
+
+  color: rgba(239, 239, 239, 0.9);
+}

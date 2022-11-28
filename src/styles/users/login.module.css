@@ -58,7 +58,7 @@
   width: 38rem;
 }
 .right-cont {
-  padding: 80px 100px 0px 60px;
+  padding: 90px 100px 0px 60px;
 }
 .title-form {
   color: black;
@@ -104,7 +104,7 @@
   background-color: none;
 }
 .login-btn {
-  width: 25rem;
+  width: 100%;
   padding: 0px;
   height: 3rem;
   background-color: #6379f4;
@@ -121,7 +121,7 @@
 
 .login-btn-off {
   background-color: #dadada52 !important;
-  width: 25rem;
+  width: 100%;
   padding: 0px;
   height: 3rem;
   font-family: Nunito Sans;
@@ -134,9 +134,13 @@
   position: relative;
   top: 1rem;
 }
+
+.eyeslash {
+  color: #706f6f;
+}
 .login-btn-off:hover {
   background-color: #dadada52 !important;
-  width: 25rem;
+  width: 100%;
   padding: 0px;
   height: 3rem;
   font-family: Nunito Sans;
@@ -162,7 +166,7 @@
   margin: 0px;
 }
 .login-btn:hover {
-  width: 25rem;
+  width: 100%;
   background-color: #6379f4;
 }
 .login-text {
@@ -184,6 +188,9 @@
   position: relative;
   top: -10px;
 }
+.forgot:hover {
+  text-decoration: underline;
+}
 .sign-up {
   font-family: Nunito Sans;
   font-style: Regular;
@@ -195,7 +202,7 @@
   display: flex;
   justify-content: center;
   position: relative;
-  top: 55px;
+  top: 5rem;
 }
 
 .text-sign-up {
@@ -212,7 +219,7 @@
 
 @media only screen and (max-width: 1024px) {
   .right-cont {
-    padding: 23px 40px 0px 33px;
+    padding: 82px 40px 0px 33px;
   }
   .form-control {
     font-size: 12px;
@@ -272,12 +279,12 @@
     top: 3rem;
   }
   .images {
-    height: 490px;
+    height: 441px;
     width: 403px;
     position: relative;
-    top: 3rem;
-    left: 1rem;
-    margin-bottom: 5rem;
+    top: 1rem;
+    left: 2rem;
+    margin-bottom: 4rem;
   }
   .desc {
     width: 26rem;
@@ -293,7 +300,7 @@
   .sign-up {
     font-size: 13px;
     position: relative;
-    top: -1rem;
+    top: 1rem;
   }
   .title-desc {
     font-size: 21px;
@@ -317,12 +324,6 @@
   }
   .title {
     padding-left: 20rem;
-  }
-  .image-left {
-    width: 27rem;
-    height: 750px;
-    position: relative;
-    left: -96px;
   }
   .right-cont {
     width: 26rem;
@@ -378,7 +379,6 @@
     font-size: 13px;
     position: relative;
     top: 1rem;
-    margin-bottom: 2rem;
   }
   .title-desc {
     font-size: 21px;
@@ -410,6 +410,8 @@
   }
   .right-cont {
     width: 26rem;
+    position: relative;
+    left: 1rem;
   }
   .login-btn-off {
     position: relative;
@@ -469,8 +471,7 @@
     width: 23rem;
   }
   .fazzpay {
-    padding-left: 70px;
-    width: 22rem;
+    padding-left: 24px;
   }
   .title-form {
     font-size: 18px;

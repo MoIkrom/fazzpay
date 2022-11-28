@@ -1,0 +1,7 @@
+.cards {
+  flex-direction: row;
+}
+
+.cursor {
+  cursor: pointer;
+}
