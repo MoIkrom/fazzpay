@@ -88,9 +88,9 @@ function index() {
             <Modal.Header closeButton>
               <Modal.Title>Topup</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Enter the amount of money, and click submit</Modal.Body>
+            <Modal.Body className={`  ${styles["title-topUp"]}`}>Enter the amount of money, and click submit</Modal.Body>
 
-            <input type="text" className="form-control form-control-sm validate ml-0" onKeyPress={inputNumber} onChange={handleAmount} />
+            <input type="text" className={`${styles["inputs"]} form-control form-control-sm validate ml-0`} onKeyPress={inputNumber} onChange={handleAmount} />
 
             <Modal.Footer>
               <Button variant="secondary" className="fw-bold text-bg-secondary text-white" onClick={handleSubmit}>

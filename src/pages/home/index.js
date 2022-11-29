@@ -12,8 +12,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Footer from "../../components/footer/index";
 import Layout from "../../components/layout/Layout";
+import Loader from "../../components/Loader/index";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import defaultImage from "../../assets/profile.jpg";
+import incomes from "../../assets/income.png";
+import expenses from "../../assets/expense.png";
 
 function index() {
   const router = useRouter();
@@ -23,10 +27,13 @@ function index() {
   const [data, setData] = useState("");
   const [income, setIncome] = useState("");
   const [expense, setExpense] = useState("");
+  const [balance, setBalance] = useState("");
   const [show, setShow] = useState(false);
   const [amount, setAmount] = useState("");
   const [isCreated, setIsCreated] = useState(false);
   const [url, setUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingB, setIsLoadingB] = useState(true);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -54,6 +61,8 @@ function index() {
         setFirstName(response.data.data.firstName);
         setLastName(response.data.data.lastName);
         setPhoneNumber(response.data.data.noTelp);
+        setBalance(response.data.data.balance);
+        setIsLoadingB(false);
         // console.log(response.data.data);
         // console.log(user_id);
       })
@@ -85,6 +94,9 @@ function index() {
       .then((response) => {
         setIncome(response.data.data.totalIncome);
         setExpense(response.data.data.totalExpense);
+        setAmount(response.data.data.amount);
+        setIsLoading(false);
+        // setData(response.data.data);
         // console.log(response.data.data);
         // console.log(response.data.data.totalIncome);
         // console.log(user_id);
@@ -128,9 +140,20 @@ function index() {
           <div className={`card ${styles["cont-card"]}`}>
             <div className={`card-body d-flex justify-content-between ${styles["cont-balance"]}`}>
               <div className="col-9">
-                <p className={` text-white  ${styles["balance"]}`}>Balance</p>
-                <h1 className={` fw-bold text-white  ${styles["balance"]}`}> Rp 120.000</h1>
-                <p className={` text-white  ${styles["balance"]}`}>+62 89372282098 </p>
+                {isLoadingB ? (
+                  <div className={`${styles["loader-balance"]}`}>
+                    <Loader />
+                  </div>
+                ) : (
+                  <div>
+                    <p className={` text-white  ${styles["balance"]}`}>Balance</p>
+                    <h1 className={` fw-bold text-white  ${styles["balance"]}`}> {`${"IDR"} ${costing(balance)}`}</h1>
+                  </div>
+                )}
+
+                {/* <h1 className={` fw-bold text-white  ${styles["balance"]}`}> IDR 1.000.000</h1> */}
+                {/* <h1 className={` fw-bold text-white  ${styles["balance"]}`}> {`${"IDR"} ${costing(data.amount)}`}</h1> */}
+                <p className={` text-white  ${styles["balance"]}`}>{data.noTelp} </p>
               </div>
               <div className="col-3 row d-flex align-content-around justify-content-center">
                 <button className={` btn d-flex gap-1 justify-content-evenly align-items-center  fw-bold ${styles["button"]}`} onClick={() => router.push("/transfer")}>
@@ -146,18 +169,25 @@ function index() {
           </div>
           <div className="container row d-flex justify-content-between px-0 mx-0">
             <div className={`card col-6 mt-2 ${styles["cont-grafik"]}`}>
-              <div className="card-body d-flex justify-content-between">
-                <div>
-                  <p className={`${styles[""]}`}>income</p>
-                  <p>{setIncome}</p>
+              {isLoading ? (
+                <Loader />
+              ) : (
+                <div className={`card-body d-flex justify-content-between ${styles["height-cont-incomes"]}`}>
+                  <div className={`d-flex align-items-center ${styles["incomes"]}`}>
+                    <Image src={incomes} alt="/" />
+                    <p className={`${styles["income"]}`}>Income</p>
+
+                    <p> {` ${"IDR"} ${costing(income)} `} </p>
+                  </div>
+                  <div className={`d-flex align-items-center ${styles["incomes"]}`}>
+                    <Image src={expenses} alt="/" />
+                    <p className={`${styles["income"]}`}>Expense</p>
+                    <p>{`${"IDR"} ${costing(expense)}`}</p>
+                  </div>
                 </div>
-                <div>
-                  <p>expense</p>
-                  <p>{setExpense}</p>
-                </div>
-              </div>
+              )}
             </div>
-            <div className="card col-5 mt-2">
+            <div className={`card col-5 mt-2 ${styles["card-height"]}`}>
               <div className="card-body d-flex justify-content-between px-0">
                 <div className="col-8">
                   <p className="fw-bold mb-0">Transaction History</p>
@@ -171,15 +201,11 @@ function index() {
               <div className="col-12">
                 {data.length > 0 ? (
                   data.map((data, index) => {
-                    // const images = data.image;
-                    // const imageProfile = images.replace("Fazzpay", "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/Fazzpay");
-                    // image={imageProfile}
-                    // console.log(imageProfile);
-                    return <Transaction key={index} firstName={data.firstName} lastName={data.lastName} status={data.type} nominal={`${"IDR"} ${costing(data.amount)}`} id={data.id} />;
+                    return <Transaction key={index} firstName={data.firstName} lastName={data.lastName} image={defaultImage} status={data.type} nominal={`${"IDR"} ${costing(data.amount)}`} id={data.id} />;
                   })
                 ) : (
-                  // <Loader />
-                  <p>Loading</p>
+                  <Loader className={`${styles["loading"]}`} />
+                  // <p>Loading</p>
                 )}
               </div>
             </div>
@@ -190,9 +216,9 @@ function index() {
             <Modal.Header closeButton>
               <Modal.Title>Topup</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Enter the amount of money, and click submit</Modal.Body>
+            <Modal.Body className={`  ${styles["title-topUp"]}`}>Enter the amount of money, and click submit</Modal.Body>
 
-            <input type="text" className="form-control form-control-sm validate ml-0" onKeyPress={inputNumber} onChange={handleAmount} />
+            <input type="text" className={`${styles["inputs"]} form-control form-control-sm validate ml-0`} onKeyPress={inputNumber} onChange={handleAmount} />
 
             <Modal.Footer>
               <Button variant="secondary" className="fw-bold text-bg-secondary text-white" onClick={handleSubmit}>

@@ -26,3 +26,9 @@
 .cont-transaction {
   padding-top: 50px;
 }
+
+.loading {
+  position: relative;
+  top: 13rem;
+  left: 12rem;
+}

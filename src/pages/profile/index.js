@@ -70,19 +70,19 @@ function index() {
             <p className={`${styles["No-Hp"]}`}>{phoneNumber} </p>
 
             <div className={`card d-flex ${styles["card-information"]} ${styles["cursor"]}`} onClick={() => router.push("/profile/personal-information")}>
-              <p className="mb-0"> Personal Information </p>
+              <p className={`mb-0 fw-bold ${styles["text"]}`}> Personal Information </p>
               <Image className={`${styles["pencil"]}`} src={panah} alt="/" />
             </div>
             <div className={`card d-flex ${styles["card-information"]} ${styles["cursor"]}`} onClick={() => router.push("/profile/update-password")}>
-              <p className="mb-0"> Change Password </p>
+              <p className={`mb-0 fw-bold ${styles["text"]}`}> Change Password </p>
               <Image className={`${styles["pencil"]}`} src={panah} alt="/" />
             </div>
-            <div className={`card d-flex ${styles["card-information"]} ${styles["cursor"]}`} onClick={() => router.push("/profile/update-pin")}>
-              <p className="mb-0"> Change PIN </p>
+            <div className={`card fw-bold d-flex ${styles["card-information"]} ${styles["cursor"]}`} onClick={() => router.push("/profile/update-pin")}>
+              <p className={`mb-0 fw-bold ${styles["text"]}`}> Change PIN </p>
               <Image className={`${styles["pencil"]}`} src={panah} alt="/" />
             </div>
-            <div className={`card d-flex ${styles["card-information"]} ${styles["cursor"]}`}>
-              <p className="mb-0"> Logout </p>
+            <div className={`card fw-bold d-flex ${styles["card-information"]} ${styles["cursor"]}`}>
+              <p className={`mb-0 ${styles["text"]}`}> Logout </p>
             </div>
           </div>
         </div>

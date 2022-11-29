@@ -5,25 +5,47 @@
   top: 100px;
 }
 
+.card-height {
+  height: 360px;
+  overflow: scroll;
+}
 .button {
   width: 150px;
-  font-size: 18px;
-  height: 50px;
+  font-size: 16px;
+  height: 44px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.2);
   font-family: Nunito sans;
   color: #ffffff;
+  margin-bottom: 8px;
 }
 .button:hover {
   width: 150px;
-  font-size: 18px;
-  height: 50px;
+  font-size: 16px;
+  height: 44px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.2);
   font-family: Nunito sans;
   color: #ffffff;
+  margin-bottom: 8px;
 }
-
+.title-topUp {
+  position: relative;
+  left: 4.7rem;
+}
+.inputs {
+  width: 300px;
+  height: 60px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  position: relative;
+  left: 6rem;
+}
+.loader-balance {
+  color: #ffffff;
+  position: relative;
+  top: 5rem;
+}
 .cont-card {
   background-color: #6379f4;
   border-radius: 20px;
@@ -33,9 +55,21 @@
 }
 
 .cont-grafik {
-  height: 323px;
+  height: 358px;
+  width: 360px;
 }
-
+.income {
+  color: #6a6a6a;
+  font-family: Nunito sans;
+  font-size: 14px;
+}
+.height-cont-incomes {
+  height: 40px;
+}
+.incomes {
+  display: flex !important;
+  flex-direction: column !important;
+}
 .balance {
   font-family: Nunito sans;
 }
@@ -45,4 +79,10 @@
   color: #6379f4;
   font-weight: 600;
   cursor: pointer;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

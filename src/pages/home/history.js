@@ -14,6 +14,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Footer from "../../components/footer/index";
 import Layout from "../../components/layout/Layout";
+import Loader from "../../components/Loader/index";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
@@ -154,8 +155,10 @@ function history() {
                     return <Transaction key={index} firstName={data.firstName} lastName={data.lastName} status={data.type} nominal={`${"IDR"} ${costing(data.amount)}`} id={data.id} />;
                   })
                 ) : (
-                  // <Loader />
-                  <p>Loading</p>
+                  <div className={`${styles["loading"]}`}>
+                    <Loader />
+                  </div>
+                  // <p>Loading</p>
                 )}
               </div>
             </div>
