@@ -100,7 +100,7 @@ function Login() {
                 className={`${styles["forgot"]} ${styles["cursor"]} form-check-label`}
                 for="exampleCheck1"
                 onClick={() => {
-                  router.push("/users/forgotPassword");
+                  router.push("/resetpassword");
                 }}
               >
                 Forgot password?

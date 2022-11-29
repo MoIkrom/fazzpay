@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,700&display=swap");
+
+.cont-card {
+  position: relative;
+  top: 100px;
+  width: 800px;
+  height: 513px;
+}
+.button {
+  background: rgba(58, 61, 66, 0.1);
+  border-radius: 12px;
+}
+.button:hover {
+  background: rgba(58, 61, 66, 0.1);
+  border-radius: 12px;
+}
+
+.filter {
+  font-family: Nunito sans;
+  font-size: 12px;
+  font-weight: 400;
+}
+.dropdown {
+  width: 100px;
+}
+.cont-transaction {
+  padding-top: 50px;
+}

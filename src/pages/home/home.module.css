@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,700&display=swap");
+
 .cont-right {
   position: relative;
   top: 100px;
@@ -5,5 +7,42 @@
 
 .button {
   width: 150px;
-  height: 45px;
+  font-size: 18px;
+  height: 50px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  font-family: Nunito sans;
+  color: #ffffff;
+}
+.button:hover {
+  width: 150px;
+  font-size: 18px;
+  height: 50px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  font-family: Nunito sans;
+  color: #ffffff;
+}
+
+.cont-card {
+  background-color: #6379f4;
+  border-radius: 20px;
+}
+.cont-balance {
+  padding: 23px !important;
+}
+
+.cont-grafik {
+  height: 323px;
+}
+
+.balance {
+  font-family: Nunito sans;
+}
+
+.see {
+  font-family: Nunito sans;
+  color: #6379f4;
+  font-weight: 600;
+  cursor: pointer;
 }

@@ -17,16 +17,15 @@ function newPassword() {
 
   const [confirmPassword, setConfirmPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [keysChangePassword, setKeysChangePassword] = useState("");
   const [isPwdshown, setIsPwdShown] = useState(false);
 
   const togglePassword = () => {
     setIsPwdShown(!isPwdshown);
   };
 
-  const handleOTP = (e) => {
-    setKeysChangePassword(e.target.value);
-  };
+  // const handleOTP = (e) => {
+  //   setKeysChangePassword(e.target.value);
+  // };
   const handlePassword = (e) => {
     setConfirmPassword(e.target.value);
   };
@@ -39,9 +38,9 @@ function newPassword() {
 
     axios
       .patch(`https://fazzpay-rose.vercel.app/auth/reset-password`, {
+        keysChangePassword: parseInt(router.query.otp),
         newPassword,
         confirmPassword,
-        keysChangePassword,
       })
       .then((response) => {
         console.log;
@@ -81,17 +80,17 @@ function newPassword() {
           <h2 className={`${styles["fazzpay"]} ${styles["title-form"]}`}>Did You Forgot Your Password? Don’t Worry, You Can Reset Your Password In a Minutes.</h2>
           <p className={`${styles["desc-form"]}`}>Now you can create a new password for your FazzPay account. Type your password twice so we can confirm your new passsword.</p>
           <form className={`${styles["form"]}`} onSubmit={submitHandler}>
-            <div className=" input-group flex-nowrap mb-3">
+            {/* <div className=" input-group flex-nowrap mb-3">
               <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                 <i class="bi bi-123"></i>
               </span>
               <input type="text" className={`form-control ${styles["border-input"]} `} placeholder="Input OTP Here" onChange={handleOTP} />
-            </div>
+            </div> */}
             <div className=" input-group flex-nowrap mb-3">
               <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                 <i class="bi bi-lock"></i>
               </span>
-              <input type={isPwdshown ? "text" : "password"} className={`form-control ${styles["border-input"]} `} placeholder="Confirm new password" onChange={handlePassword} />
+              <input type={isPwdshown ? "text" : "password"} className={`form-control ${styles["border-input"]} `} placeholder="Create new password" onChange={handlePassword} />
               <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                 {isPwdshown ? <i className={` bi bi-eye ${styles["cursor"]}`} onClick={togglePassword}></i> : <i className={` bi bi-eye-slash ${styles["cursor"]}`} onClick={togglePassword}></i>}
               </span>

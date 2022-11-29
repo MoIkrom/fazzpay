@@ -16,10 +16,11 @@ function forgotPassword() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
-  const [linkDirect, setLinkDirect] = useState("http://localhost:3000/users/resetPassword");
+  const [input, setInput] = useState(true);
+  const [inputpending, setInputpending] = useState(true);
 
   const handleEmail = (e) => {
-    setEmail(e.target.value);
+    setInputpending(false), setInput(true), setEmail(e.target.value);
   };
 
   const submitHandler = (e) => {
@@ -28,7 +29,7 @@ function forgotPassword() {
     axios
       .post(`https://fazzpay-rose.vercel.app/auth/forgot-password`, {
         email,
-        linkDirect,
+        linkDirect: "http://localhost:3000/resetpassword",
       })
       .then((response) => {
         console.log(response);
@@ -37,7 +38,7 @@ function forgotPassword() {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
         });
-        setTimeout(() => router.push("/users/resetPassword"), 3000);
+        // setTimeout(() => router.push("/users/resetPassword"), 3000);
       })
       .catch((err) => {
         toast.error("Email is wrong", {

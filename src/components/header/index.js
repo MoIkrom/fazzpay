@@ -50,7 +50,7 @@ function index() {
               </div>
             </div>
             <div className="me-2">
-              <p className="fs-6 fw-bold m-0">{`${firstName} ${lastName}`}</p>
+              <p className={`fs-6 fw-bold m-0 ${styles["name"]}`}>{`${firstName} ${lastName}`}</p>
               <p className="fs-7 m-0">{phoneNumber}</p>
             </div>
           </div>

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/header/index";
 import Sidebar from "../../components/sidebar/index";
-import styles from "../home/home.module.css";
+import styles from "../home/history.module.css";
 import Image from "next/image";
 import Transaction from "../../components/card_transaction/index";
+import Dropdown from "react-bootstrap/Dropdown";
+import SSRProvider from "react-bootstrap/SSRProvider";
 
 import transfer from "../../assets/transfer.png";
 import topUp from "../../assets/topUp.png";
@@ -15,7 +17,7 @@ import Layout from "../../components/layout/Layout";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function index() {
+function history() {
   const router = useRouter();
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -119,62 +121,36 @@ function index() {
 
   return (
     <>
-      <Layout title="Home" />
+      <SSRProvider>
+        <Layout title="History" />
 
-      <Header />
-      <div className="container d-flex">
-        <Sidebar />
-        <div className={`container ${styles["cont-right"]} `}>
-          <div className={`card ${styles["cont-card"]}`}>
-            <div className={`card-body d-flex justify-content-between ${styles["cont-balance"]}`}>
-              <div className="col-9">
-                <p className={` text-white  ${styles["balance"]}`}>Balance</p>
-                <h1 className={` fw-bold text-white  ${styles["balance"]}`}> Rp 120.000</h1>
-                <p className={` text-white  ${styles["balance"]}`}>+62 89372282098 </p>
-              </div>
-              <div className="col-3 row d-flex align-content-around justify-content-center">
-                <button className={` btn d-flex gap-1 justify-content-evenly align-items-center  fw-bold ${styles["button"]}`} onClick={() => router.push("/transfer")}>
-                  <Image src={transfer} alt="/" />
-                  <p className="mb-0">Transfer</p>
+        <Header />
+        <div className="container d-flex">
+          <Sidebar />
+          <div className={`card container ${styles["cont-card"]}`}>
+            <div className="card-body ">
+              <div className="d-flex justify-content-between align-item-center">
+                <p className="mb-0">Transaction History</p>
+                <Dropdown>
+                  <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                    -- Select Filter --
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Accept</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2"> Top Up</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Transfer </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                {/* <div className="btn-group">
+                <button className={` ${styles["button"]} btn btn-sm`} type="button">
+                  <p className={` mb-0 ${styles["filter"]}`}></p>
                 </button>
-                <button className={` btn d-flex gap-1 justify-content-evenly align-items-center fw-bold  ${styles["button"]}`} onClick={handleShow}>
-                  <Image src={topUp} alt="/" />
-                  <p className="mb-0"> Top Up</p>
-                </button>
+              </div> */}
               </div>
-            </div>
-          </div>
-          <div className="container row d-flex justify-content-between px-0 mx-0">
-            <div className={`card col-6 mt-2 ${styles["cont-grafik"]}`}>
-              <div className="card-body d-flex justify-content-between">
-                <div>
-                  <p className={`${styles[""]}`}>income</p>
-                  <p>{setIncome}</p>
-                </div>
-                <div>
-                  <p>expense</p>
-                  <p>{setExpense}</p>
-                </div>
-              </div>
-            </div>
-            <div className="card col-5 mt-2">
-              <div className="card-body d-flex justify-content-between px-0">
-                <div className="col-8">
-                  <p className="fw-bold mb-0">Transaction History</p>
-                </div>
-                <div className="col-4">
-                  <p className={`d-flex justify-content-end pe-3 mb-0 ${styles["see"]} `} onClick={() => router.push("/home/history")}>
-                    See All
-                  </p>
-                </div>
-              </div>
-              <div className="col-12">
+              <div className={`col-12 ${styles["cont-transaction"]}`}>
                 {data.length > 0 ? (
                   data.map((data, index) => {
-                    // const images = data.image;
-                    // const imageProfile = images.replace("Fazzpay", "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/Fazzpay");
-                    // image={imageProfile}
-                    // console.log(imageProfile);
                     return <Transaction key={index} firstName={data.firstName} lastName={data.lastName} status={data.type} nominal={`${"IDR"} ${costing(data.amount)}`} id={data.id} />;
                   })
                 ) : (
@@ -185,40 +161,10 @@ function index() {
             </div>
           </div>
         </div>
-        {!isCreated ? (
-          <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-            <Modal.Header closeButton>
-              <Modal.Title>Topup</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Enter the amount of money, and click submit</Modal.Body>
-
-            <input type="text" className="form-control form-control-sm validate ml-0" onKeyPress={inputNumber} onChange={handleAmount} />
-
-            <Modal.Footer>
-              <Button variant="secondary" className="fw-bold text-bg-secondary text-white" onClick={handleSubmit}>
-                submit
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        ) : (
-          <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-            <Modal.Header closeButton>
-              <Modal.Title>Topup</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              Click this Link yo will be direct to payment :
-              <p>
-                <a href={url} target="_blank" class="tooltip-test" title="Tooltip">
-                  {url}
-                </a>
-              </p>
-            </Modal.Body>
-          </Modal>
-        )}
-      </div>
-      <Footer />
+        <Footer />
+      </SSRProvider>
     </>
   );
 }
 
-export default index;
+export default history;
