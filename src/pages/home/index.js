@@ -8,6 +8,7 @@ import Transaction from "../../components/Card_transaction/index";
 import transfer from "../../assets/transfer.png";
 import topUp from "../../assets/topUp.png";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 import { useRouter } from "next/router";
 import Footer from "../../components/Footer/index";
@@ -46,8 +47,8 @@ function index() {
   };
 
   useEffect(() => {
-    const user_id = localStorage.getItem("id");
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
+    const user_id = Cookies.get("id");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
       .get(`https://fazzpay-rose.vercel.app/user/profile/${user_id}`, {
@@ -73,7 +74,7 @@ function index() {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
       .get(`https://fazzpay-rose.vercel.app/transaction/history?page=1&limit=5&filter=MONTH`)
@@ -87,8 +88,8 @@ function index() {
       });
   }, []);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const user_id = localStorage.getItem("id");
+    const token = Cookies.get("token");
+    const user_id = Cookies.get("id");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
       .get(`https://fazzpay-rose.vercel.app/dashboard/${user_id}`)
@@ -246,7 +247,7 @@ function index() {
             <Modal.Body>
               Click this Link yo will be direct to payment :
               <p>
-                <a href={url} target="_blank" class="tooltip-test" title="Tooltip">
+                <a href={url} target="_blank" className="tooltip-test" title="Midtrans-Payment">
                   {url}
                 </a>
               </p>

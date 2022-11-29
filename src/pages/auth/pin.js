@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
 import PinInput from "../../components/pinInput";
+import Cookies from "js-cookie";
 
 // Import Image
 import hp from "../../assets/phone-login.png";
@@ -30,17 +31,18 @@ function pin() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const user_id = localStorage.getItem("id");
+    const getToken = Cookies.get("token");
+    const getId = Cookies.get("id");
     let fullPin = pin.pin1 + pin.pin2 + pin.pin3 + pin.pin4 + pin.pin5 + pin.pin6;
     fullPin = +fullPin;
-    const token = localStorage.getItem("token");
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${getToken}`;
     axios
-      .patch(`https://fazzpay-rose.vercel.app/user/pin/${user_id}`, {
+      .patch(`https://fazzpay-rose.vercel.app/user/pin/${getId}`, {
         pin: fullPin,
       })
       .then((response) => {
         setIsCreated(true);
+        console.log(pin);
       })
       .catch((err) => {
         console.log(err);

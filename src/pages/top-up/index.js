@@ -4,6 +4,7 @@ import Sidebar from "../../components/sidebar/index";
 import styles from "../top-up/topUp.module.css";
 import Image from "next/image";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -22,8 +23,8 @@ function index() {
   // const handleShow = () => setShow(true);
 
   useEffect(() => {
-    const user_id = localStorage.getItem("id");
-    const token = localStorage.getItem("token");
+    const user_id = Cookies.get("id");
+    const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
       .get(`https://fazzpay-rose.vercel.app/user/profile/${user_id}`, {

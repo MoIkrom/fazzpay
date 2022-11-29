@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/profile/update-phone-number.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 import Layout from "../../components/layout/Layout";
 import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/index";
+import Sidebar from "../../components/sidebar/sidebar";
 import Footer from "../../components/footer/index";
 
 function personalInformation() {
@@ -27,8 +28,8 @@ function personalInformation() {
   };
 
   useEffect(() => {
-    const user_id = localStorage.getItem("id");
-    const token = localStorage.getItem("token");
+    const user_id = Cookies.get("id");
+    const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
       .get(`https://fazzpay-rose.vercel.app/user/profile/${user_id}`, {
@@ -52,8 +53,8 @@ function personalInformation() {
 
   const submitNoHp = (e) => {
     e.preventDefault();
-    const user_id = localStorage.getItem("id");
-    const token = localStorage.getItem("token");
+    const user_id = Cookies.get("id");
+    const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
       .patch(`https://fazzpay-rose.vercel.app/user/profile/${user_id}`, {

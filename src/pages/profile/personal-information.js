@@ -7,6 +7,7 @@ import Layout from "../../components/Layout/Layout";
 import Header from "../../components/Header/index";
 import Sidebar from "../../components/Sidebar/sidebar";
 import Footer from "../../components/Footer/index";
+import Cookies from "js-cookie";
 
 function personalInformation() {
   const router = useRouter();
@@ -17,8 +18,9 @@ function personalInformation() {
   const [email, setEmail] = useState("");
 
   useEffect(() => {
-    const user_id = localStorage.getItem("id");
-    const token = localStorage.getItem("token");
+    const user_id = Cookies.get("id");
+    const token = Cookies.get("token");
+
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
       .get(`https://fazzpay-rose.vercel.app/user/profile/${user_id}`, {

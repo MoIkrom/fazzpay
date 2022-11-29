@@ -26,7 +26,7 @@ function index() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
       .get(`https://fazzpay-rose.vercel.app/user?page=1&limit=5&filter=MONTH&search=${search}`)

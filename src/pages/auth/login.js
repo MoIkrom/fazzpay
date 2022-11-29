@@ -59,17 +59,17 @@ function Login() {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
         });
+        setTimeout(() => (pin === null ? router.replace("/auth/pin") : router.replace("/home")), 3000);
         const pin = response.data.data.pin;
         const getToken = Cookies.get("token");
         const getId = Cookies.get("id");
         dispatch(authActions.userThunk(getToken, getId));
-        setTimeout(() => (pin === null ? router.replace("/auth/pin") : router.replace("/home")), 3000);
       })
       .catch((err) => {
-        toast.error("Email/password is wrong", {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 2000,
-        });
+        // toast.error("Email/password is wrong", {
+        //   position: toast.POSITION.TOP_CENTER,
+        //   autoClose: 2000,
+        // });
         console.log(err);
       });
   };

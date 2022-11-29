@@ -1,13 +1,13 @@
 import React from "react";
 
-import css from "../../../styles/TransferFailed.module.css";
-import Header from "../../../components/Header/Header";
-import Footer from "../../../components/Footer/Footer";
+import css from "../../../styles/transfer/TransferFailed.module.css";
+import Header from "../../../components/Header/index";
+import Footer from "../../../components/Footer/index";
 import Sidebar from "../../../components/Sidebar/sidebar";
 import failed from "../../../assets/transferFailed/failed.png";
-import profile from "../../../assets/sitampan.png";
+import profile from "../../../assets/profile_transfer/profile_image.png";
 import Image from "next/image";
-import Drawers from "../../../components/Drawer/Drawer";
+// import Drawers from "../../../components/Drawer/Drawer";
 
 function TransferFailed() {
   return (
@@ -75,7 +75,7 @@ function TransferFailed() {
         </div>
       </div>
       <Footer />
-      <Drawers pages="tranfer child" />
+      {/* <Drawers pages="tranfer child" /> */}
     </>
   );
 }

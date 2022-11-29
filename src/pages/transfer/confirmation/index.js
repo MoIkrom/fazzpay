@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 const ReactCodeInput = dynamic(import("react-code-input"));
 //importstyles
-import styles from "../../../styles/Confirmation.module.css";
+import styles from "../../../styles/transfer/Confirmation.module.css";
 
 //import components
 import Image from "next/image";
@@ -11,9 +11,9 @@ import Footer from "../../../components/footer/index";
 import Sidebar from "../../../components/sidebar/sidebar";
 
 //import image
-import icon_samuel from "../../../assets/dashboard/icon_samuel.png";
+import icon_samuel from "../../../assets/profile_transfer/profile_image.png";
 
-import Drawers from "../../../components/drawer/Drawer";
+// import Drawers from "../../../components/drawer/Drawer";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -214,7 +214,7 @@ function Confirmation() {
         </div>
       </div>
       <Footer />
-      <Drawers pages="transfer child" />
+      {/* <Drawers pages="transfer child" /> */}
       <ToastContainer position="top-center" autoClose={2000} hideProgressBar={false} closeOnClick={true} pauseOnHover={true} draggable={true} theme="light" />
     </>
   );

@@ -4,6 +4,10 @@ import styles from "../../styles/profile/profile.module.css";
 import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import authActions from "../../redux/actions/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -21,17 +25,44 @@ import offCanvas from "../../components/offCanvas/offCanvas";
 
 function index() {
   const router = useRouter();
+  const dispatch = useDispatch();
 
+  const profile = useSelector((state) => state.auth.profile);
+  const [display, setDisplay] = useState(profile.image);
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [image, setImage] = useState("");
   const [showLogout, setShowLogout] = useState(false);
+  const [btnsave, setBtnsave] = useState(false);
+
+  // Get user by id
+  const Editimage = () => {
+    const getId = Cookies.get("id");
+    const getToken = Cookies.get("token");
+    const formData = new FormData();
+    if (image) formData.append("image", image);
+    axios
+      .patch(`https://fazzpay-rose.vercel.app/user/image/${getId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
+      })
+      .then((res) => (console.log(res), toast.success(res.data.msg), dispatch(authActions.userThunk(getToken, getId))))
+      .catch((err) => toast.error(err.response.data.msg));
+  };
+  // inputImage => preview image
+  const inputImage = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setDisplay(URL.createObjectURL(event.target.files[0]));
+      setImage(event.target.files[0]);
+    }
+  };
 
   const handleLogout = () => {
     const urlLogout = `https://fazzpay-rose.vercel.app/auth/logout`;
-    const token = localStorage.getItem("token");
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    const getToken = Cookies.get("token");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${getToken}`;
     axios
       .post(urlLogout)
       .then((response) => {
@@ -42,37 +73,60 @@ function index() {
       });
   };
   const deleteToken = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
+    const getToken = Cookies.get("token");
+    dispatch(authActions.logoutThunk(getToken)), Cookies.remove("id"), Cookies.remove("token");
+    toast.success("Logout Success"),
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+
+    // ---------- Cara Delete Pakai Locadtorage ----------
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("id");
   };
   const handleCloseLogOut = () => setShowLogout(false);
   const handleShowLogout = () => setShowLogout(true);
+  const handleCancel = () => {
+    setDisplay(profile.image), setBtnsave(false);
+  };
+
+  const handleSaveShow = () => {
+    setBtnsave(true);
+  };
 
   useEffect(() => {
-    const user_id = localStorage.getItem("id");
-    const token = localStorage.getItem("token");
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    axios
-      .get(`https://fazzpay-rose.vercel.app/user/profile/${user_id}`, {
-        firstName,
-        lastName,
-        phoneNumber,
-      })
-      .then((response) => {
-        // setfirstName: response.data.data.firstName;
-        // lastName: response.data.data.lastName;
-        // const lastName = ;
-        setFirstName(response.data.data.firstName);
-        setLastName(response.data.data.lastName);
-        setPhoneNumber(response.data.data.noTelp);
-        setImage(response.data.data.image);
-        console.log(response.data.data.image);
-        // console.log(user_id);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    const getToken = Cookies.get("token");
+    const getId = Cookies.get(`id`);
+    dispatch(authActions.userThunk(getToken, getId));
+    console.log(display);
+  }, [dispatch]);
+
+  // --------- Ini codingan punya Lama --------------
+  // useEffect(() => {
+  //   const user_id = localStorage.getItem("id");
+  //   const token = localStorage.getItem("token");
+  //   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  //   axios
+  //     .get(`https://fazzpay-rose.vercel.app/user/profile/${user_id}`, {
+  //       firstName,
+  //       lastName,
+  //       phoneNumber,
+  //     })
+  //     .then((response) => {
+  //       // setfirstName: response.data.data.firstName;
+  //       // lastName: response.data.data.lastName;
+  //       // const lastName = ;
+  //       setFirstName(response.data.data.firstName);
+  //       setLastName(response.data.data.lastName);
+  //       setPhoneNumber(response.data.data.noTelp);
+  //       setImage(response.data.data.image);
+  //       console.log(response.data.data.image);
+  //       // console.log(user_id);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   //   const imageProfile = `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${image}`;
 
@@ -86,12 +140,44 @@ function index() {
 
         <div className={`container ${styles["cont-right"]} `}>
           <div className={`card d-flex justify-content-center align-items-center ${styles["cards"]}`}>
-            <Image className={`${styles["profile-picture"]}`} src={defaultImage} alt="/" />
+            <Image
+              className={`${styles["profile-picture"]}`}
+              src={display === "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/null" ? `${process.env.CLOUDINARY_LINK}` : display}
+              alt="image"
+              width={90}
+              height={90}
+              border-radius={20}
+            />
+
+            {/* _------ INi Punya Lama */}
+            {/* <Image className={`${styles["profile-picture"]}`} src={defaultImage} alt="/" /> */}
+
+            {/* --------------------------------- */}
+
             {/* <Image className={`${styles["profile-picture"]}`} src={imageProfile} alt="/" width={48} height={48} style={{ borderRadius: "8px" }} /> */}
-            <div className={`d-flex align-items-center gap-2 ${styles["cursor"]} `}>
+            {/* ______________________________________ */}
+
+            <div className={btnsave ? "d-none" : `${styles.profile_edit}`} onClick={handleSaveShow}>
+              {/* <i className="fa-solid fa-pencil"></i> */}
+              <label htmlFor="file">Edit</label>
+              <input type="file" name="file" id="file" onChange={inputImage} className="d-none" />
+            </div>
+            <div className={btnsave ? `${styles.profile_button}` : "d-none"}>
+              <button className={styles.btn_save_profile} onClick={() => (Editimage(), setBtnsave(false))}>
+                Save Profile
+              </button>
+              <button className={styles.btn_cancel_profile} onClick={handleCancel}>
+                Cancel
+              </button>
+            </div>
+
+            {/* ---------- INi edit versi Lama */}
+            {/* <div className={`d-flex align-items-center gap-2 ${styles["cursor"]} `}>
               <Image className={`${styles["pencil"]}  ${styles["cursor"]}`} src={pencil} alt="/" />
               <p className="mb-0">Edit</p>
-            </div>
+            </div> */}
+
+            {/* ---------------------- */}
             <p className="mb-0">{`${firstName} ${lastName} `} </p>
             <p className={`${styles["No-Hp"]}`}>{phoneNumber} </p>
 

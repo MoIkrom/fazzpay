@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-import css from "../../../styles/TransferSuccess.module.css";
-import Header from "../../../components/Header/Header";
-import Footer from "../../../components/Footer/Footer";
-import Sidebar from "../../../components/sidebar/Sidebar";
+import css from "../../../styles/transfer/TransferSuccess.module.css";
+import Header from "../../../components/Header/index";
+import Footer from "../../../components/Footer/index";
+import Sidebar from "../../../components/Sidebar/sidebar";
 
 import checklist from "../../../assets/transferSuccess/success.png";
 import profile from "../../../assets/Landpage/profil-3.png";
 import Image from "next/image";
+import { toast, ToastContainer } from "react-toastify";
 
-import Drawers from "../../../components/drawer/Drawer";
+// import Drawers from "../../../components/drawer/Drawer";
 import { useDispatch, useSelector } from "react-redux";
 import authActions from "../../../redux/actions/auth";
 import Cookies from "js-cookie";
@@ -25,8 +26,8 @@ function TransferSuccess() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    const getToken = localStorage.get("token");
-    // const getToken = Cookies.get("token");
+    // const getToken = localStorage.get("token");
+    const getToken = Cookies.get("token");
     axios
       .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profile/${transactions.receiverId}`, {
         headers: {
@@ -116,7 +117,8 @@ function TransferSuccess() {
               <div className={`${css.transferTo}`}>Transfer to</div>
               <div className={`${css.box} ${css.container}`}>
                 <span>
-                  <Image src={data.image === null ? `${process.env.CLOUDINARY_LINK}` : `${process.env.CLOUD}${data.image}`} width={80} height={80} alt="profile" />
+                  <Image src={profile} width={80} height={80} alt="profile" />
+                  {/* <Image src={data.image === null ? `${process.env.CLOUDINARY_LINK}` : `${process.env.CLOUD}${data.image}`} width={80} height={80} alt="profile" /> */}
                 </span>
                 <span className={`${css.profilDetail}`}>
                   <div className={`${css.Name}`}>
@@ -144,7 +146,7 @@ function TransferSuccess() {
         </div>
       </div>
       <Footer />
-      <Drawers pages="transfer child" />
+      {/* <Drawers pages="transfer child" /> */}
     </>
   );
 }

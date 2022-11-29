@@ -14,14 +14,14 @@ import CardProfileTransfer from "../../components/card_profile_transfer/ProfileT
 // import Drawers from "../../components/drawer/Drawer";
 import Cookies from "js-cookie";
 import axios from "axios";
-// // import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
-// import authActions from "../../redux/actions/auth";
+import authActions from "../../redux/actions/auth";
 
 function TransferID() {
   // add router.push to pin when click continue
   const router = useRouter();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const profile = useSelector((state) => state.auth.profile);
   // const ErrorMessage = useSelector((state) => state.auth.error);
 
