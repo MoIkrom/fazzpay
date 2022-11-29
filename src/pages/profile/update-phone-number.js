@@ -3,6 +3,7 @@ import styles from "../../styles/profile/update-phone-number.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import { toast, ToastContainer } from "react-toastify";
 
 import Layout from "../../components/layout/Layout";
 import Header from "../../components/header/index";
@@ -62,6 +63,11 @@ function personalInformation() {
       })
       .then((response) => {
         console.log(response);
+        toast.success("Change Phone Number Success", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000,
+        });
+        setTimeout(() => router.replace("/profile"), 3000);
       })
       .catch((err) => {
         console.log(err);
@@ -114,6 +120,7 @@ function personalInformation() {
           </div>
         </div>
       </div>
+      <ToastContainer />
       <Footer />
     </div>
   );

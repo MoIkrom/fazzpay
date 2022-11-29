@@ -51,6 +51,24 @@ function Confirmation() {
       .catch((err) => {
         console.log(err);
       });
+  }, []);
+  useEffect(() => {
+    const getToken = Cookies.get("token");
+    axios
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profile/${transactions.receiverId}`, {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
+      })
+      .then((res) => {
+        setImage(`${process.env.CLOUD}${res.data.data.image}`);
+        setFirstname(res.data.data.firstName);
+        setLastname(res.data.data.lastName);
+        setPhone(res.data.data.noTelp);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -121,6 +139,12 @@ function Confirmation() {
     const bulan = date.getMonth();
     const tahun = date.getFullYear();
     return `${arrbulan[bulan]} ${tanggal} , ${tahun} - ${jam}:${menit} `;
+  };
+
+  const inputNumber = (event) => {
+    if (!/[0-9]/.test(event.key)) {
+      event.preventDefault();
+    }
   };
 
   const costing = (price) => {
@@ -201,7 +225,7 @@ function Confirmation() {
                     </div>
                     <p className={styles["confirmation"]}>Enter your 6 digits PIN for confirmation to continue transferring money.</p>
                     <div className={styles.pin}>
-                      <ReactCodeInput type="number" fields={6} pattern="/^-?\d+\.?\d*$/" onChange={valuePin} {...props} />
+                      <ReactCodeInput type="password" onKeyPress={inputNumber} fields={6} pattern="/^-?\d+\.?\d*$/" onChange={valuePin} {...props} />
                     </div>
                     <button className={styles["button-sec"]} onClick={valuePinHandler}>
                       Continue

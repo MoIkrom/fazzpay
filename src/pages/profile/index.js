@@ -22,6 +22,9 @@ import Header from "../../components/Header/index";
 import Sidebar from "../../components/Sidebar/sidebar";
 import Footer from "../../components/Footer/index";
 import offCanvas from "../../components/offCanvas/offCanvas";
+const myLoader = ({ src, width, quality }) => {
+  return `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${src}?w=${width}&q=${quality || 75}`;
+};
 
 function index() {
   const router = useRouter();
@@ -33,8 +36,10 @@ function index() {
   const [firstName, setFirstName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [image, setImage] = useState("");
+  const [patchimage, setPatchImage] = useState("");
   const [showLogout, setShowLogout] = useState(false);
   const [btnsave, setBtnsave] = useState(false);
+  const [ischange, setIschange] = useState(false);
 
   // Get user by id
   const Editimage = () => {
@@ -48,13 +53,25 @@ function index() {
           Authorization: `Bearer ${getToken}`,
         },
       })
-      .then((res) => (console.log(res), toast.success(res.data.msg), dispatch(authActions.userThunk(getToken, getId))))
-      .catch((err) => toast.error(err.response.data.msg));
+      .then(
+        (res) => {
+          setIschange(true);
+          router.reload(window.location.pathname);
+          console.log(res);
+        }
+
+        // toast.success(res.data.msg),
+        // dispatch(authActions.userThunk(getToken, getId))
+      )
+      .catch((err) => {
+        console.log(err), toast.error(err.response.data.msg);
+      });
   };
+
   // inputImage => preview image
   const inputImage = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setDisplay(URL.createObjectURL(event.target.files[0]));
+      setPatchImage(URL.createObjectURL(event.target.files[0]));
       setImage(event.target.files[0]);
     }
   };
@@ -99,7 +116,25 @@ function index() {
     const getId = Cookies.get(`id`);
     dispatch(authActions.userThunk(getToken, getId));
     console.log(display);
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    const user_id = Cookies.get("id");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    axios
+      .get(`https://fazzpay-rose.vercel.app/user/profile/${user_id}`)
+      .then((response) => {
+        setImage(response.data.data.image);
+        setLastName(response.data.data.lastName);
+        setFirstName(response.data.data.firstName);
+        setPhoneNumber(response.data.data.noTelp);
+        console.log(image);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   // --------- Ini codingan punya Lama --------------
   // useEffect(() => {
@@ -128,7 +163,7 @@ function index() {
   //     });
   // }, []);
 
-  //   const imageProfile = `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${image}`;
+  const imageProfile = `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${image}`;
 
   return (
     <>
@@ -140,17 +175,25 @@ function index() {
 
         <div className={`container ${styles["cont-right"]} `}>
           <div className={`card d-flex justify-content-center align-items-center ${styles["cards"]}`}>
-            <Image
+            {/* <Image
               className={`${styles["profile-picture"]}`}
               src={display === "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/null" ? `${process.env.CLOUDINARY_LINK}` : display}
               alt="image"
               width={90}
               height={90}
               border-radius={20}
-            />
+            /> */}
+            {/* <Image
+              className={`${styles["profile-picture"]}`}
+              src={display === "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/null" ? `${process.env.CLOUDINARY_LINK}` : display}
+              alt="image"
+              width={90}
+              height={90}
+              border-radius={20}
+            /> */}
 
             {/* _------ INi Punya Lama */}
-            {/* <Image className={`${styles["profile-picture"]}`} src={defaultImage} alt="/" /> */}
+            <Image className={`${styles["profile-picture"]}`} src={ischange ? image : image === null ? defaultImage : imageProfile} alt="/" width={90} height={90} border-radius={20} />
 
             {/* --------------------------------- */}
 

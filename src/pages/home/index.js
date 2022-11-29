@@ -112,12 +112,18 @@ function index() {
     setAmount(e.target.value);
   };
 
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
+
   const handleSubmit = () => {
     axios
       .post(`https://fazzpay-rose.vercel.app/transaction/top-up`, { amount, url })
       .then((response) => {
         setIsCreated(true);
-        setUrl(response.data.data.redirectUrl);
+        openInNewTab(response.data.data.redirectUrl);
+        setShow(false);
         // console.log(response.data.data.redirectUrl);
       })
       .catch((err) => {
@@ -224,23 +230,22 @@ function index() {
           </div>
         )}
 
-        {!isCreated ? (
-          <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-            <Modal.Header closeButton>
-              <Modal.Title>Topup</Modal.Title>
-            </Modal.Header>
-            <Modal.Body className={`  ${styles["title-topUp"]}`}>Enter the amount of money, and click submit</Modal.Body>
+        <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+          <Modal.Header closeButton>
+            <Modal.Title>Topup</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className={`  ${styles["title-topUp"]}`}>Enter the amount of money, and click submit</Modal.Body>
 
-            <input type="text" className={`${styles["inputs"]} form-control form-control-sm validate ml-0`} onKeyPress={inputNumber} onChange={handleAmount} />
+          <input type="text" className={`${styles["inputs"]} form-control form-control-sm validate ml-0`} onKeyPress={inputNumber} onChange={handleAmount} />
 
-            <Modal.Footer>
-              <Button variant="primary" className="fw-bold text-bg-secondary text-white" onClick={handleSubmit}>
-                submit
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        ) : (
-          <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+          <Modal.Footer>
+            <Button variant="primary" className="fw-bold text-bg-secondary text-white" onClick={handleSubmit}>
+              submit
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        {/* <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
             <Modal.Header closeButton>
               <Modal.Title>Topup</Modal.Title>
             </Modal.Header>
@@ -252,8 +257,7 @@ function index() {
                 </a>
               </p>
             </Modal.Body>
-          </Modal>
-        )}
+          </Modal> */}
       </div>
       <Footer />
     </>
