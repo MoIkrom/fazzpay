@@ -6,15 +6,25 @@
   padding: 40px 0;
 }
 
+.div-loading {
+  position: relative;
+  top: 15rem;
+  left: 17rem;
+}
 .content_right {
   background-color: white;
   padding: 30px;
   border-radius: 30px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  height: 514px;
+  position: relative;
+  top: 6rem;
+  width: 75%;
+  left: 2rem;
 }
 
 .scroll_bar {
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   height: 500px;
   margin-top: 30px;
 }

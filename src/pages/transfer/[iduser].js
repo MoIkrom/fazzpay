@@ -8,7 +8,7 @@ import css from "../../styles/transfer/TransferDetail.module.css";
 // import components
 import Header from "../../components/header/index";
 import Footer from "../../components/footer/index";
-import Sidebar from "../../components/sidebar/index";
+import Sidebar from "../../components/sidebar/sidebar";
 
 import CardProfileTransfer from "../../components/card_profile_transfer/ProfileTransfer";
 import Drawers from "../../components/drawer/Drawer";

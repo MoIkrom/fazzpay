@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/index";
+import Sidebar from "../../components/sidebar/sidebar";
 import styles from "../home/home.module.css";
 import Image from "next/image";
 import Transaction from "../../components/card_transaction/index";

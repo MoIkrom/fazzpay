@@ -9,8 +9,9 @@ import Image from "next/image";
 import Footer from "../../components/footer/index";
 import Layout from "../../components/layout/Layout";
 import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/index";
+import Sidebar from "../../components/sidebar/sidebar";
 import Receiver from "../../components/receiver/index";
+import Loader from "../../components/Loader/index";
 
 import search from "../../assets/search.png";
 
@@ -18,6 +19,7 @@ function index() {
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [data, setData] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const searchHandler = (e) => {
     setSearch(e.target.value);
@@ -30,6 +32,7 @@ function index() {
       .get(`https://fazzpay-rose.vercel.app/user?page=13&limit=5&filter=MONTH&search=${search}`)
       .then((response) => {
         setData(response.data.data);
+        setIsLoading(false);
         console.log(response.data);
       })
       .catch((err) => {
@@ -97,8 +100,10 @@ function index() {
                       );
                     })
                   ) : (
-                    // <Loader />
-                    <p>Loading</p>
+                    <div className={`${css["div-loading"]}`}>
+                      <Loader />
+                    </div>
+                    // <p>Loading</p>
                   )}
                 </div>
                 {/* {data.map((data) => {

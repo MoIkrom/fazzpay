@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import Layout from "../../components/layout/Layout";
 import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/index";
+import Sidebar from "../../components/sidebar/sidebar";
 import Footer from "../../components/footer/index";
 
 function personalInformation() {

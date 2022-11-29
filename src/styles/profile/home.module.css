@@ -10,7 +10,9 @@
   width: 150px;
   height: 45px;
 }
-
+.cursor {
+  cursor: pointer;
+}
 .profile-picture {
   border-radius: 0px;
   width: 100px;

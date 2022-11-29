@@ -8,7 +8,7 @@ import styles from "../../../styles/Confirmation.module.css";
 import Image from "next/image";
 import Header from "../../../components/header/index";
 import Footer from "../../../components/footer/index";
-import Sidebar from "../../../components/sidebar/index";
+import Sidebar from "../../../components/sidebar/sidebar";
 
 //import image
 import icon_samuel from "../../../assets/dashboard/icon_samuel.png";

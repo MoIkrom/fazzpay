@@ -12,7 +12,7 @@ import panah from "../../assets//arrow-right.png";
 // import { useRouter } from "next/router";
 import Layout from "../../components/layout/Layout";
 import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/index";
+import Sidebar from "../../components/sidebar/sidebar";
 import Footer from "../../components/footer/index";
 
 function index() {
@@ -62,8 +62,8 @@ function index() {
           <div className={`card d-flex justify-content-center align-items-center ${styles["cards"]}`}>
             <Image className={`${styles["profile-picture"]}`} src={defaultImage} alt="/" />
             {/* <Image className={`${styles["profile-picture"]}`} src={imageProfile} alt="/" width={48} height={48} style={{ borderRadius: "8px" }} /> */}
-            <div className="d-flex align-items-center gap-2">
-              <Image className={`${styles["pencil"]}`} src={pencil} alt="/" />
+            <div className={`d-flex align-items-center gap-2 ${styles["cursor"]} `}>
+              <Image className={`${styles["pencil"]}  ${styles["cursor"]}`} src={pencil} alt="/" />
               <p className="mb-0">Edit</p>
             </div>
             <p className="mb-0">{`${firstName} ${lastName} `} </p>
