@@ -13,6 +13,7 @@ function index() {
   const [amount, setAmount] = useState("");
   const [isCreated, setIsCreated] = useState(false);
   const [url, setUrl] = useState("");
+  // const [url, setUrl] = useState("");
 
   const handleLogout = () => {
     const urlLogout = `https://fazzpay-rose.vercel.app/auth/logout`;
