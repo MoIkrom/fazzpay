@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import styles from "../card_receiver/card.module.css";
+import styles from "./card.module.css";
 // import axios from "axios";
 
 // import profile from "../../assets/profile.jpg";

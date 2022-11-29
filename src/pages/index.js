@@ -17,15 +17,15 @@ export default function Home() {
   const router = useRouter();
 
   const handleClickLogin = () => {
-    router.push("/users/login");
+    router.push("/auth/login");
   };
 
   const handleClickRegister = () => {
-    router.push("/users/register");
+    router.push("/auth/register");
   };
 
   const handleClickTryIt = () => {
-    router.push("/users/register");
+    router.push("/auth/register");
   };
 
   return (

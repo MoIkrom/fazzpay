@@ -3,17 +3,25 @@ import Layout from "../../components/layout/Layout";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import styles from "../../styles/users/login.module.css";
+import styles from "../../styles/users/register.module.css";
 import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
+// import redux
+import { useDispatch, useSelector } from "react-redux";
+import registerActions from "../../redux/actions/register";
+
 // Import Image
 import hp from "../../assets/phone-login.png";
 
-function Login() {
+function register() {
   const router = useRouter();
+  const dispacth = useDispatch();
+
+  const [firstName, setFirstname] = useState("");
+  const [lastName, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPwdshown, setIsPwdShown] = useState(false);
@@ -22,6 +30,12 @@ function Login() {
     setIsPwdShown(!isPwdshown);
   };
 
+  const handleFirstname = (e) => {
+    setFirstname(e.target.value);
+  };
+  const handleLastname = (e) => {
+    setLastname(e.target.value);
+  };
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -31,27 +45,32 @@ function Login() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     axios
-      .post(`https://fazzpay-rose.vercel.app/auth/login`, {
+      .post(`https://fazzpay-rose.vercel.app/auth/register`, {
+        firstName,
+        lastName,
         email,
         password,
       })
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response);
 
-        localStorage.setItem("token", response.data.data.token);
-        localStorage.setItem("id", response.data.data.id);
-        // localStorage.setItem("pin", response.data.data.pin);
-        toast.success("Login success", {
+        toast.success("Sign Up success", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
         });
-
-        setTimeout(() => (response.data.data.pin === null ? router.push("/users/pin") : router.push("/home")), 3000);
+        dispacth(
+          registerActions.registerThunk({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+          })
+        );
+        setTimeout(() => router.push("/auth/login"), 3000);
       })
       .catch((err) => {
-        toast.error("Email/password is wrong", {
+        toast.error("Invalid Email", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
         });
@@ -60,9 +79,9 @@ function Login() {
   };
 
   return (
-    <Layout title="Login">
+    <Layout title="Register">
       <div className={`d-flex ${styles["cont-left"]}`}>
-        <div className={` container p-0 col-lg-7 ${styles["cont-main"]}`}>
+        <div className={` container p-0 col-7 ${styles["cont-main"]}`}>
           <div className={`container ${styles["image-left"]}`}>
             <p className={`${styles["fazzpay"]} ${styles["title"]} `}>FazzPay </p>
             <div className="cont-image">
@@ -80,15 +99,27 @@ function Login() {
           <h2 className={`${styles["fazzpay"]} ${styles["title-form"]}`}>Start Accessing Banking Needs With All Devices and All Platforms With 30.000+ Users</h2>
           <p className={`${styles["desc-form"]}`}>Transfering money is eassier than ever, you can access FazzPay wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
           <form className={`${styles["form"]}`} onSubmit={submitHandler}>
-            <div className="input-group flex-nowrap mb-3">
+            <div className="input-group flex-nowrap mb-2">
+              <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
+                <i className={`bi bi-person ${styles["addon-wrapping"]}`}></i>
+              </span>
+              <input type="text" className={`form-control ${styles["border-input"]} `} required="true" placeholder="Enter your firstname" aria-label="Username" aria-describedby="addon-wrapping" onChange={handleFirstname} />
+            </div>
+            <div className="input-group flex-nowrap mb-2">
+              <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
+                <i className={`bi bi-person ${styles["addon-wrapping"]}`}></i>
+              </span>
+              <input type="text" className={`form-control ${styles["border-input"]} `} required="true" placeholder="Enter your lastname" aria-label="Username" aria-describedby="addon-wrapping" onChange={handleLastname} />
+            </div>
+            <div className="input-group flex-nowrap mb-2">
               <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                 <i className={`bi bi-envelope ${styles["addon-wrapping"]}`}></i>
               </span>
               <input type="text" className={`form-control ${styles["border-input"]} `} required="true" placeholder="Enter your e-mail" aria-label="Username" aria-describedby="addon-wrapping" onChange={handleEmail} />
             </div>
-            <div className=" input-group flex-nowrap mb-3">
+            <div className=" input-group flex-nowrap mb-2">
               <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
-                <i class="bi bi-lock"></i>
+                <i className={`bi bi-lock `}></i>
               </span>
               <input type={isPwdshown ? "text" : "password"} className={`form-control ${styles["border-input"]} `} placeholder="Enter your password" onChange={handlePassword} />
               <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
@@ -96,38 +127,30 @@ function Login() {
               </span>
             </div>
             <div className="mb-3 form-check">
-              <label
-                className={`${styles["forgot"]} ${styles["cursor"]} form-check-label`}
-                for="exampleCheck1"
-                onClick={() => {
-                  router.push("/resetpassword");
-                }}
-              >
-                Forgot password?
-              </label>
+              <label className={`${styles["forgot"]} form-check-label`} for="exampleCheck1"></label>
             </div>
-            {(email && password) === "" ? (
+            {(email && password && firstName && lastName) === "" ? (
               <button disabled className={` btn ${styles["login-btn-off"]}`}>
-                <p className={` ${styles["login-text-disabled"]}`}>Login</p>
+                <p className={` ${styles["login-text-disabled"]}`}>Sign Up</p>
               </button>
             ) : (
               <button type="submit" className={` btn  ${styles["login-btn"]}`}>
-                <p className={` ${styles["login-text"]}`}>Login</p>
+                <p className={` ${styles["login-text"]}`}>Sign Up</p>
               </button>
             )}
             {/* <button type="submit" className={` btn  ${styles["login-btn"]}`}>
-              <p className={` ${styles["login-text"]}`}>Login</p>
-            </button> */}
+            <p className={` ${styles["login-text"]}`}>Login</p>
+          </button> */}
           </form>
           <p className={`${styles["sign-up"]}`}>
-            Don’t have an account? Let’s &nbsp;
+            Already have an account? Let’s &nbsp;
             <strong
               className={`${styles["text-sign-up"]} ${styles["cursor"]}`}
               onClick={() => {
-                router.push("/users/register");
+                router.push("/auth/login");
               }}
             >
-              Sign Up
+              Login
             </strong>
           </p>
         </div>
@@ -137,4 +160,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default register;

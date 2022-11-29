@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import styles from "../card_transaction/card.module.css";
+import styles from "./card.module.css";
 import { useRouter } from "next/router";
 // import axios from "axios";
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../sidebar/Sidebar";
+import Sidebar from "../Sidebar/sidebar";
 import Drawers from "react-modern-drawer";
 import styles from "./Drawer.module.css";
 

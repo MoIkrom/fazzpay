@@ -48,7 +48,7 @@ function newPassword() {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
         });
-        setTimeout(() => router.push("/users/login"), 3000);
+        setTimeout(() => router.push("/auth/login"), 3000);
       })
       .catch((err) => {
         toast.error("Confirm password is wrong", {

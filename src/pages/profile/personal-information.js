@@ -3,10 +3,10 @@ import styles from "../../styles/profile/personal-info.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-import Layout from "../../components/layout/Layout";
-import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/sidebar";
-import Footer from "../../components/footer/index";
+import Layout from "../../components/Layout/Layout";
+import Header from "../../components/Header/index";
+import Sidebar from "../../components/Sidebar/sidebar";
+import Footer from "../../components/Footer/index";
 
 function personalInformation() {
   const router = useRouter();

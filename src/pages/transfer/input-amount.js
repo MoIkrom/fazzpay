@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/index";
+import Sidebar from "../../components/sidebar/sidebar";
 import styles from "../home/home.module.css";
 import Image from "next/image";
 import Transaction from "../../components/card_transaction/index";
@@ -92,61 +92,11 @@ function index() {
       <div className="container d-flex">
         <Sidebar />
         <div className={`container ${styles["cont-right"]} `}>
-          <div className="card">
-            <div className="card-body d-flex justify-content-between">
-              <div className="col-9">
-                <p>balance</p>
-                <h1> Rp 120.000</h1>
-                <p>+62 89372282098 </p>
-              </div>
-              <div className="col-3 row d-flex align-content-around justify-content-center">
-                <button className={` btn btn-primary ${styles["button"]}`} onClick={() => router.push("/transfer")}>
-                  {" "}
-                  Transfer
-                </button>
-                <button className={` btn btn-primary ${styles["button"]}`} onClick={() => router.push("/top-up")}>
-                  {" "}
-                  Top Up
-                </button>
-              </div>
-            </div>
-          </div>
+          <div className="card"></div>
           <div className="container row d-flex justify-content-between px-0 mx-0">
-            <div className="card col-6 mt-2">
-              <div className="card-body d-flex justify-content-between">
-                <div>
-                  <p>income</p>
-                  <p>{setIncome}</p>
-                </div>
-                <div>
-                  <p>expense</p>
-                  <p>{setExpense}</p>
-                </div>
-              </div>
-            </div>
+            <div className="card col-6 mt-2"></div>
             <div className="card col-5 mt-2">
-              <div className="card-body d-flex justify-content-between">
-                <div className="col-8">
-                  <p>Transaction</p>
-                </div>
-                <div className="col-4">
-                  <p>See All</p>
-                </div>
-              </div>
-              <div className="col-12">
-                {data.length > 0 ? (
-                  data.map((data, index) => {
-                    const images = data.image;
-                    const imageProfile = images.replace("Fazzpay", "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/Fazzpay");
-                    // image={imageProfile}
-                    // console.log(imageProfile);
-                    return <Transaction key={index} firstName={data.firstName} lastName={data.lastName} status={data.status} nominal={`${"IDR"} ${costing(data.amount)}`} id={data.id} />;
-                  })
-                ) : (
-                  // <Loader />
-                  <p>Loading</p>
-                )}
-              </div>
+              <div className="card-body d-flex justify-content-between"></div>
             </div>
           </div>
         </div>

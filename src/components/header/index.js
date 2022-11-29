@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import imageDefault from "../../../public/profile.jpg";
 import axios from "axios";
-import styles from "../header/Header.module.css";
+import styles from "./Header.module.css";
+
+import bell from "../../assets/bell.png";
 
 function index() {
   const [lastName, setLastName] = useState("");
@@ -42,7 +44,7 @@ function index() {
         <div className="container-lg d-flex align-items-center position-relative">
           <h1 className={`${styles["title"]}`}>FazzPay</h1>
           <div className="d-flex align-items-center flex-grow-1 flex-md-grow-0">
-            <div className="d-flex align-items-center me-auto">
+            <div className={`d-flex align-items-center me-auto ${styles["icon-user"]}`}>
               <div className="profile-picture me-3">
                 <Image src={setImage === null ? setImage : imageDefault} alt="profile picture" width={48} height={48} style={{ borderRadius: "8px" }} objectFit="cover" />
                 {/* <div className="profile-picture me-3">
@@ -53,6 +55,7 @@ function index() {
               <p className={`fs-6 fw-bold m-0 ${styles["name"]}`}>{`${firstName} ${lastName}`}</p>
               <p className="fs-7 m-0">{phoneNumber}</p>
             </div>
+            <Image src={bell} Alt="/" />
           </div>
         </div>
       </div>

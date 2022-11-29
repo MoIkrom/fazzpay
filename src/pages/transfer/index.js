@@ -6,11 +6,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Image from "next/image";
 
-import Footer from "../../components/footer/index";
-import Layout from "../../components/layout/Layout";
-import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/sidebar";
-import Receiver from "../../components/receiver/index";
+import Footer from "../../components/Footer/index";
+import Layout from "../../components/Layout/Layout";
+import Header from "../../components/Header/index";
+import Sidebar from "../../components/Sidebar/sidebar";
+import Receiver from "../../components/Receiver/index";
 import Loader from "../../components/Loader/index";
 
 import search from "../../assets/search.png";
@@ -29,7 +29,7 @@ function index() {
     const token = localStorage.getItem("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
-      .get(`https://fazzpay-rose.vercel.app/user?page=13&limit=5&filter=MONTH&search=${search}`)
+      .get(`https://fazzpay-rose.vercel.app/user?page=1&limit=5&filter=MONTH&search=${search}`)
       .then((response) => {
         setData(response.data.data);
         setIsLoading(false);

@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/sidebar";
+import Header from "../../components/Header/index";
+import Sidebar from "../../components/Sidebar/sidebar";
 import styles from "../home/home.module.css";
 import Image from "next/image";
-import Transaction from "../../components/card_transaction/index";
+import Transaction from "../../components/Card_transaction/index";
 
 import transfer from "../../assets/transfer.png";
 import topUp from "../../assets/topUp.png";
 import axios from "axios";
 
 import { useRouter } from "next/router";
-import Footer from "../../components/footer/index";
-import Layout from "../../components/layout/Layout";
+import Footer from "../../components/Footer/index";
+import Layout from "../../components/Layout/Layout";
 import Loader from "../../components/Loader/index";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import defaultImage from "../../assets/profile.jpg";
 import incomes from "../../assets/income.png";
 import expenses from "../../assets/expense.png";
+import graphic from "../../assets/graphic.png";
 
 function index() {
   const router = useRouter();
@@ -136,81 +137,92 @@ function index() {
       <Header />
       <div className="container d-flex">
         <Sidebar />
-        <div className={`container ${styles["cont-right"]} `}>
-          <div className={`card ${styles["cont-card"]}`}>
-            <div className={`card-body d-flex justify-content-between ${styles["cont-balance"]}`}>
-              <div className="col-9">
-                {isLoadingB ? (
-                  <div className={`${styles["loader-balance"]}`}>
-                    <Loader />
-                  </div>
+        {isLoading ? (
+          <div className={`${styles["loading"]}`}>
+            <Loader />
+            {/* <p> Loading</p> */}
+          </div>
+        ) : (
+          <div className={`container ${styles["cont-right"]} `}>
+            <div className={`card ${styles["cont-card"]}`}>
+              <div className={`card-body d-flex justify-content-between ${styles["cont-balance"]}`}>
+                <div className="col-9">
+                  {isLoadingB ? (
+                    <div className={`${styles["loader-balance"]}`}>
+                      <Loader />
+                    </div>
+                  ) : (
+                    <div>
+                      <p className={` text-white  ${styles["balance"]}`}>Balance</p>
+                      <h1 className={` fw-bold text-white  ${styles["balance"]}`}> {`${"IDR"} ${costing(balance)}`}</h1>
+                    </div>
+                  )}
+                  <p className={` text-white  ${styles["balance"]}`}>{data.noTelp} </p>
+                </div>
+                <div className="col-3 row d-flex align-content-around justify-content-center">
+                  <button className={` btn d-flex gap-1 justify-content-evenly align-items-center  fw-bold ${styles["button"]}`} onClick={() => router.push("/transfer")}>
+                    <Image src={transfer} alt="/" />
+                    <p className="mb-0">Transfer</p>
+                  </button>
+                  <button className={` btn d-flex gap-1 justify-content-evenly align-items-center fw-bold  ${styles["button"]}`} onClick={handleShow}>
+                    <Image src={topUp} alt="/" />
+                    <p className="mb-0"> Top Up</p>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="container row d-flex justify-content-between px-0 mx-0">
+              <div className={`card col-7 mt-2 ${styles["cont-grafik"]}`}>
+                {isLoading ? (
+                  <Loader />
                 ) : (
-                  <div>
-                    <p className={` text-white  ${styles["balance"]}`}>Balance</p>
-                    <h1 className={` fw-bold text-white  ${styles["balance"]}`}> {`${"IDR"} ${costing(balance)}`}</h1>
+                  <div className={`card-body d-flex justify-content-between ${styles["height-cont-incomes"]}`}>
+                    <div className={`d-flex align-items-center ${styles["incomes"]}`}>
+                      <Image src={incomes} alt="/" />
+                      <p className={`${styles["income"]}`}>Income</p>
+
+                      <p> {` ${"IDR"} ${costing(income)} `} </p>
+                    </div>
+                    <div className={`d-flex align-items-center ${styles["incomes"]}`}>
+                      <Image src={expenses} alt="/" />
+                      <p className={`${styles["income"]}`}>Expense</p>
+                      <p>{`${"IDR"} ${costing(expense)}`}</p>
+                    </div>
                   </div>
                 )}
-
-                {/* <h1 className={` fw-bold text-white  ${styles["balance"]}`}> IDR 1.000.000</h1> */}
-                {/* <h1 className={` fw-bold text-white  ${styles["balance"]}`}> {`${"IDR"} ${costing(data.amount)}`}</h1> */}
-                <p className={` text-white  ${styles["balance"]}`}>{data.noTelp} </p>
+                <Image className={`${styles["grap"]}`} src={graphic} alt="/" />
               </div>
-              <div className="col-3 row d-flex align-content-around justify-content-center">
-                <button className={` btn d-flex gap-1 justify-content-evenly align-items-center  fw-bold ${styles["button"]}`} onClick={() => router.push("/transfer")}>
-                  <Image src={transfer} alt="/" />
-                  <p className="mb-0">Transfer</p>
-                </button>
-                <button className={` btn d-flex gap-1 justify-content-evenly align-items-center fw-bold  ${styles["button"]}`} onClick={handleShow}>
-                  <Image src={topUp} alt="/" />
-                  <p className="mb-0"> Top Up</p>
-                </button>
+              <div className={`card col-5 mt-2 ${styles["card-height"]}`}>
+                <div className="card-body d-flex justify-content-between px-0">
+                  <div className="col-8">
+                    <p className="fw-bold mb-0">Transaction History</p>
+                  </div>
+                  <div className="col-4">
+                    <p className={`d-flex justify-content-end pe-3 mb-0 ${styles["see"]} `} onClick={() => router.push("/home/history")}>
+                      See All
+                    </p>
+                  </div>
+                </div>
+                <div className="col-12">
+                  {isLoading ? (
+                    <div className={`${styles["loading"]}`}>
+                      <Loader />
+                    </div>
+                  ) : data.length > 0 ? (
+                    data.map((data, index) => {
+                      return <Transaction key={index} firstName={data.firstName} lastName={data.lastName} image={defaultImage} status={data.type} nominal={`${"IDR"} ${costing(data.amount)}`} id={data.id} />;
+                    })
+                  ) : (
+                    <div className={`${styles["loading"]}`}>
+                      <p> You Don’t Have Any transaction Yet</p>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-          <div className="container row d-flex justify-content-between px-0 mx-0">
-            <div className={`card col-6 mt-2 ${styles["cont-grafik"]}`}>
-              {isLoading ? (
-                <Loader />
-              ) : (
-                <div className={`card-body d-flex justify-content-between ${styles["height-cont-incomes"]}`}>
-                  <div className={`d-flex align-items-center ${styles["incomes"]}`}>
-                    <Image src={incomes} alt="/" />
-                    <p className={`${styles["income"]}`}>Income</p>
+        )}
 
-                    <p> {` ${"IDR"} ${costing(income)} `} </p>
-                  </div>
-                  <div className={`d-flex align-items-center ${styles["incomes"]}`}>
-                    <Image src={expenses} alt="/" />
-                    <p className={`${styles["income"]}`}>Expense</p>
-                    <p>{`${"IDR"} ${costing(expense)}`}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className={`card col-5 mt-2 ${styles["card-height"]}`}>
-              <div className="card-body d-flex justify-content-between px-0">
-                <div className="col-8">
-                  <p className="fw-bold mb-0">Transaction History</p>
-                </div>
-                <div className="col-4">
-                  <p className={`d-flex justify-content-end pe-3 mb-0 ${styles["see"]} `} onClick={() => router.push("/home/history")}>
-                    See All
-                  </p>
-                </div>
-              </div>
-              <div className="col-12">
-                {data.length > 0 ? (
-                  data.map((data, index) => {
-                    return <Transaction key={index} firstName={data.firstName} lastName={data.lastName} image={defaultImage} status={data.type} nominal={`${"IDR"} ${costing(data.amount)}`} id={data.id} />;
-                  })
-                ) : (
-                  <Loader className={`${styles["loading"]}`} />
-                  // <p>Loading</p>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
         {!isCreated ? (
           <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
             <Modal.Header closeButton>
@@ -221,7 +233,7 @@ function index() {
             <input type="text" className={`${styles["inputs"]} form-control form-control-sm validate ml-0`} onKeyPress={inputNumber} onChange={handleAmount} />
 
             <Modal.Footer>
-              <Button variant="secondary" className="fw-bold text-bg-secondary text-white" onClick={handleSubmit}>
+              <Button variant="primary" className="fw-bold text-bg-secondary text-white" onClick={handleSubmit}>
                 submit
               </Button>
             </Modal.Footer>

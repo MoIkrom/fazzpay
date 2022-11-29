@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 
-import styles from "../../styles/profile/home.module.css";
+import styles from "../../styles/profile/profile.module.css";
 import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/router";
+
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 import defaultImage from "../../assets//profile.jpg";
 import pencil from "../../assets//pencil.png";
 import panah from "../../assets//arrow-right.png";
 
 // import { useRouter } from "next/router";
-import Layout from "../../components/layout/Layout";
-import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/sidebar";
-import Footer from "../../components/footer/index";
+import Layout from "../../components/Layout/Layout";
+import Header from "../../components/Header/index";
+import Sidebar from "../../components/Sidebar/sidebar";
+import Footer from "../../components/Footer/index";
+import offCanvas from "../../components/offCanvas/offCanvas";
 
 function index() {
   const router = useRouter();
@@ -22,6 +26,27 @@ function index() {
   const [firstName, setFirstName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [image, setImage] = useState("");
+  const [showLogout, setShowLogout] = useState(false);
+
+  const handleLogout = () => {
+    const urlLogout = `https://fazzpay-rose.vercel.app/auth/logout`;
+    const token = localStorage.getItem("token");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    axios
+      .post(urlLogout)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const deleteToken = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+  };
+  const handleCloseLogOut = () => setShowLogout(false);
+  const handleShowLogout = () => setShowLogout(true);
 
   useEffect(() => {
     const user_id = localStorage.getItem("id");
@@ -58,6 +83,7 @@ function index() {
       <Header />
       <div className="container d-flex">
         <Sidebar />
+
         <div className={`container ${styles["cont-right"]} `}>
           <div className={`card d-flex justify-content-center align-items-center ${styles["cards"]}`}>
             <Image className={`${styles["profile-picture"]}`} src={defaultImage} alt="/" />
@@ -82,10 +108,37 @@ function index() {
               <Image className={`${styles["pencil"]}`} src={panah} alt="/" />
             </div>
             <div className={`card fw-bold d-flex ${styles["card-information"]} ${styles["cursor"]}`}>
-              <p className={`mb-0 ${styles["text"]}`}> Logout </p>
+              <p className={`mb-0 ${styles["text"]}`} onClick={handleShowLogout}>
+                {" "}
+                Logout{" "}
+              </p>
             </div>
           </div>
         </div>
+        <Modal show={showLogout} onHide={handleCloseLogOut} backdrop="static" keyboard={false}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirmation</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Are you sure want to Log Out?</Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="success"
+              className="fw-bold text-bg-success text-white"
+              onClick={() => {
+                deleteToken();
+                handleLogout();
+                setTimeout(() => {
+                  router.push("/");
+                }, 1000);
+              }}
+            >
+              Yes
+            </Button>
+            <Button variant=" secondary" className="fw-bold text-bg-secondary  text-white" onClick={handleCloseLogOut}>
+              No
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
 
       <Footer />

@@ -20,9 +20,23 @@
 }
 @media only screen and (max-width: 425px) {
   .title {
-    padding-right: 14rem;
+    padding-right: 4rem;
   }
   .name {
     font-size: 14px !important;
+  }
+  .icon-user {
+    margin-right: 0px !important;
+  }
+}
+@media only screen and (max-width: 325px) {
+  .title {
+    padding-right: 0rem !important;
+  }
+  .name {
+    font-size: 14px !important;
+  }
+  .icon-user {
+    margin-right: 0px !important;
   }
 }

@@ -11,19 +11,19 @@ import Footer from "../../components/footer/index";
 import Sidebar from "../../components/sidebar/sidebar";
 
 import CardProfileTransfer from "../../components/card_profile_transfer/ProfileTransfer";
-import Drawers from "../../components/drawer/Drawer";
+// import Drawers from "../../components/drawer/Drawer";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+// // import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
-import authActions from "../../redux/actions/auth";
+// import authActions from "../../redux/actions/auth";
 
 function TransferID() {
   // add router.push to pin when click continue
   const router = useRouter();
-  const dispatch = useDispatch();
-  const profile = useSelector((state) => state.auth.profile);
-  const ErrorMessage = useSelector((state) => state.auth.error);
+  // const dispatch = useDispatch();
+  // const profile = useSelector((state) => state.auth.profile);
+  // const ErrorMessage = useSelector((state) => state.auth.error);
 
   const [changecolor, setChangecolor] = useState(true);
   const [data, setData] = useState({});
@@ -44,7 +44,6 @@ function TransferID() {
       .catch((err) => {
         toast.error(err.response.data.msg);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const valuePrice = (e) => {
@@ -64,7 +63,7 @@ function TransferID() {
   };
 
   const clickHandler = () => {
-    if (profile.balance < price) {
+    if (data.balance < price) {
       return toast.error("overlimit");
     }
     return dispatch(
@@ -96,7 +95,7 @@ function TransferID() {
               <CardProfileTransfer
                 key={data.id}
                 idUser={data.id}
-                images={data.image === null ? `${process.env.CLOUDINARY_LINK}` : `${process.env.CLOUD}${data.image}`}
+                // images={data.image === null ? `${process.env.CLOUDINARY_LINK}` : `${process.env.CLOUD}${data.image}`}
                 name={data.firstName}
                 noTelp={data.noTelp === null ? "Phone number empty" : data.number}
               />
@@ -107,9 +106,7 @@ function TransferID() {
                 <div className={css.data_nominal}>
                   <input type="tel" value={price} placeholder="0.00" onChange={valuePrice} />
                 </div>
-                <div className={css.data_available}>
-                  <p>{profile.balance <= 0 ? "IDR. 0" : costing(`${profile.balance}`) + ` Available`}</p>
-                </div>
+                <div className={css.data_available}>{/* <p>{profile.balance <= 0 ? "IDR. 0" : costing(`${profile.balance}`) + ` Available`}</p> */}</div>
                 <div className={changecolor ? css.data_note_grey : css.data_note}>
                   <i className="fa-solid fa-pencil"></i>
                   <input type="text" onChange={valueDesc} />
@@ -123,8 +120,8 @@ function TransferID() {
         </div>
       </div>
       <Footer />
-      <Drawers pages="transfer child" />
-      <ToastContainer position="top-center" autoClose={2000} hideProgressBar={false} closeOnClick={true} pauseOnHover={true} draggable={true} theme="light" />
+      {/* <Drawers pages="transfer child" /> */}
+      {/* <ToastContainer position="top-center" autoClose={2000} hideProgressBar={false} closeOnClick={true} pauseOnHover={true} draggable={true} theme="light" /> */}
     </>
   );
 }

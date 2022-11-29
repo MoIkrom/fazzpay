@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/sidebar";
+import Header from "../../components/Header/index";
+import Sidebar from "../../components/Sidebar/sidebar";
 import styles from "../home/history.module.css";
 import Image from "next/image";
-import Transaction from "../../components/card_transaction/index";
+import Transaction from "../../components/Card_transaction/index";
 import Dropdown from "react-bootstrap/Dropdown";
 import SSRProvider from "react-bootstrap/SSRProvider";
 
@@ -12,8 +12,8 @@ import topUp from "../../assets/topUp.png";
 import axios from "axios";
 
 import { useRouter } from "next/router";
-import Footer from "../../components/footer/index";
-import Layout from "../../components/layout/Layout";
+import Footer from "../../components/Footer/index";
+import Layout from "../../components/Layout/Layout";
 import Loader from "../../components/Loader/index";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";

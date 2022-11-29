@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../sidebar/sidebar.module.css";
+import styles from "./sidebar.module.css";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import axios from "axios";
@@ -13,7 +13,7 @@ import user from "../../assets/user.png";
 import plus from "../../assets/plus.png";
 import logout from "../../assets/log-out.png";
 
-function index() {
+function index(props) {
   const router = useRouter();
   const [show, setShow] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
@@ -72,7 +72,7 @@ function index() {
       <section className=" d-flex ">
         <div className={` ${styles["card"]} card `}>
           <div className=" card-body">
-            <div className="d-flex gap-3 mt-5 mb-4 ms-3 ">
+            <div className={`d-flex gap-3 mt-5 mb-4 ms-3`}>
               <Image src={grid} alt={"/"} />
               <p className={`${styles["cursor"]}`} onClick={() => router.push("/home")}>
                 Dashboard
