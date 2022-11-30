@@ -103,7 +103,7 @@ function updatePassword() {
         setMessage("PIN updated");
         resetForm();
         setIsCurrentPinConfirmed(false);
-        setTimeout(() => router.replace("/profile"), 2000);
+        setTimeout(() => router.replace("/profile"), 3000);
 
         // toast.success("Change Password success", {
         //   position: toast.POSITION.TOP_CENTER,
