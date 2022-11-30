@@ -7,7 +7,7 @@ import styles from "../../styles/users/pin.module.css";
 import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
-import PinInput from "../../components/pinInput";
+import PinInput from "../../components/PinInput/pinInput";
 import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
 

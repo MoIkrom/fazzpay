@@ -9,7 +9,7 @@ import Sidebar from "../../components/Sidebar/sidebar";
 import Footer from "../../components/Footer/index";
 import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
-import PinInput from "../../components/pinInput";
+import PinInput from "../../components/PinInput/pinInput";
 
 function updatePassword() {
   const router = useRouter();
