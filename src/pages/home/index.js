@@ -145,7 +145,7 @@ function index() {
       <div className="container d-flex">
         <Sidebar />
         {isLoading ? (
-          <div className={`${styles["loading"]}`}>
+          <div className={`${styles["loading-up"]}`}>
             <Loader />
             {/* <p> Loading</p> */}
           </div>

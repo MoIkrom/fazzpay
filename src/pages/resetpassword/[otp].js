@@ -108,7 +108,7 @@ function newPassword() {
             <div className="mb-3 form-check">
               <label className={`${styles["forgot"]} ${styles["cursor"]} form-check-label`} for="exampleCheck1"></label>
             </div>
-            {(confirmPassword && newPassword && keysChangePassword) === "" ? (
+            {(confirmPassword && newPassword) === "" ? (
               <button disabled className={` btn ${styles["login-btn-off"]}`}>
                 <p className={` ${styles["login-text-disabled"]}`}>Reset Password</p>
               </button>

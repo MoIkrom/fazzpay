@@ -8,6 +8,7 @@ import Header from "../../components/Header/index";
 import Sidebar from "../../components/Sidebar/sidebar";
 import Footer from "../../components/Footer/index";
 import Cookies from "js-cookie";
+import { toast, ToastContainer } from "react-toastify";
 
 function updatePassword() {
   const router = useRouter();
@@ -22,16 +23,27 @@ function updatePassword() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
+  const handleConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+  const handleOldPassword = (e) => {
+    setOldPassword(e.target.value);
+  };
+  const handleNewPassword = (e) => {
+    setNewPassword(e.target.value);
   };
   const togglePassword = () => {
     setIsPwdShown(!isPwdshown);
   };
   const submitHandler = (e) => {
     e.preventDefault();
+    const user_id = Cookies.get("id");
+    const getToken = Cookies.get("token");
     axios
-      .patch(`https://fazzpay-rose.vercel.app/user/password`, {
+      .patch(`https://fazzpay-rose.vercel.app/user/password/${user_id}`, {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
         oldPassword,
         newPassword,
         confirmPassword,
@@ -41,6 +53,7 @@ function updatePassword() {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
         });
+        setTimeout(() => router.replace("/profile"), 3000);
       })
       .catch((err) => {
         toast.error("Confirm password is wrong", {
@@ -101,7 +114,7 @@ function updatePassword() {
                   <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                     <i class="bi bi-lock"></i>
                   </span>
-                  <input type={isPwdshown ? "text" : "password"} className={`form-control ${styles["border-input"]} `} placeholder="Current password" onChange={handlePassword} />
+                  <input type={isPwdshown ? "text" : "password"} className={`form-control ${styles["border-input"]} `} onChange={handleOldPassword} placeholder="Current password" />
                   <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                     {isPwdshown ? (
                       <i className={` bi bi-eye ${styles["eyeslash"]} ${styles["cursor"]}`} onClick={togglePassword}></i>
@@ -114,7 +127,7 @@ function updatePassword() {
                   <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                     <i class="bi bi-lock"></i>
                   </span>
-                  <input type={isPwdshown ? "text" : "password"} className={`form-control ${styles["border-input"]} `} placeholder="New password" onChange={handlePassword} />
+                  <input type={isPwdshown ? "text" : "password"} className={`form-control ${styles["border-input"]} `} placeholder="New password" onChange={handleNewPassword} />
                   <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                     {isPwdshown ? (
                       <i className={` bi bi-eye ${styles["eyeslash"]} ${styles["cursor"]}`} onClick={togglePassword}></i>
@@ -127,7 +140,7 @@ function updatePassword() {
                   <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                     <i class="bi bi-lock"></i>
                   </span>
-                  <input type={isPwdshown ? "text" : "password"} className={`form-control ${styles["border-input"]} `} placeholder="Repeat new password" onChange={handlePassword} />
+                  <input type={isPwdshown ? "text" : "password"} className={`form-control ${styles["border-input"]} `} placeholder="Repeat new password" onChange={handleConfirmPassword} />
                   <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
                     {isPwdshown ? (
                       <i className={` bi bi-eye ${styles["eyeslash"]} ${styles["cursor"]}`} onClick={togglePassword}></i>
@@ -136,7 +149,7 @@ function updatePassword() {
                     )}
                   </span>
                 </div>
-                {password === "" ? (
+                {(oldPassword && newPassword && confirmPassword) === "" ? (
                   <button disabled className={` btn ${styles["login-btn-off"]}`}>
                     <p className={` ${styles["login-text-disabled"]}`}>Change Password</p>
                   </button>
@@ -150,6 +163,8 @@ function updatePassword() {
           </div>
         </div>
       </div>
+      <ToastContainer />
+
       <Footer />
     </div>
   );

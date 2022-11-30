@@ -29,11 +29,11 @@ function index() {
     const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
-      .get(`https://fazzpay-rose.vercel.app/user?page=1&limit=5&filter=MONTH&search=${search}`)
+      .get(`https://fazzpay-rose.vercel.app/user?page=1&limit=3&search=${search}`)
       .then((response) => {
         setData(response.data.data);
         setIsLoading(false);
-        console.log(response.data);
+        console.log(response.data.data.data.images);
       })
       .catch((err) => {
         console.log(err);
@@ -92,11 +92,18 @@ function index() {
             {/* profile */}
             <div className={css.scroll_bar}>
               <div className={css.scroll}>
-                <div className="col-12">
+                <div className={`col-12 ${css["cursor"]}`}>
                   {data.length > 0 ? (
                     data.map((data, index) => {
                       return (
-                        <Receiver key={index} firstName={data.firstName} lastName={data.lastName} images={data.image === null ? `${process.env.CLOUDINARY_LINK}` : `${process.env.CLOUD}${data.image}`} noTelp={data.noTelp} id={data.id} />
+                        <Receiver
+                          key={index}
+                          firstName={data.firstName}
+                          lastName={data.lastName}
+                          images={data.images === null || data.images === undefined ? `${process.env.CLOUDINARY_LINK}` : `${process.env.CLOUD}${data.image}`}
+                          noTelp={data.noTelp}
+                          id={data.id}
+                        />
                       );
                     })
                   ) : (

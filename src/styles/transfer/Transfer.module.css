@@ -11,6 +11,9 @@
   top: 15rem;
   left: 17rem;
 }
+.cursor {
+  cursor: pointer;
+}
 .content_right {
   background-color: white;
   padding: 30px;

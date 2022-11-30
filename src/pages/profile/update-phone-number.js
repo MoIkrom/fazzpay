@@ -82,41 +82,43 @@ function personalInformation() {
         <Sidebar />
         <div className={`container ${styles["cont-right"]} `}>
           <div className={`card d-flex  ${styles["cards"]}`}>
-            <div className="container p-4">
+            <div className={`container p-4 ${styles["cont-up"]}`}>
               <div className={`${styles["person"]}`}>
                 <p className={`mb-0 ${styles["desc"]}`}>Edit Phone Number</p>
                 <p className={` ${styles["desc-1"]}`}>Add at least one phone number for the transfer ID so you can start transfering your money to another user.</p>
               </div>
             </div>
-            <form className={`${styles["form"]}`} onSubmit={submitNoHp}>
-              <div className="input-group flex-nowrap mb-3">
-                <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
-                  <i className={`bi bi-telephone ${styles["addon-wrapping"]}`}></i>
-                </span>
-                <input
-                  type="text"
-                  className={`form-control ${styles["border-input"]} `}
-                  required="true"
-                  placeholder="Enter your phone number"
-                  aria-label="Username"
-                  aria-describedby="addon-wrapping"
-                  onChange={handleNoHp}
-                  onKeyPress={inputNumber}
-                  minLength="10"
-                  maxLength="13"
-                />
-              </div>
+            <div className={`${styles["cont-password"]}`}>
+              <form className={`${styles["form"]}`} onSubmit={submitNoHp}>
+                <div className="input-group flex-nowrap mb-3">
+                  <span className={`input-group-text ${styles["email"]}`} id="addon-wrapping">
+                    <i className={`bi bi-telephone ${styles["addon-wrapping"]}`}></i>
+                  </span>
+                  <input
+                    type="text"
+                    className={`form-control ${styles["border-input"]} `}
+                    required="true"
+                    placeholder="Enter your phone number"
+                    aria-label="Username"
+                    aria-describedby="addon-wrapping"
+                    onChange={handleNoHp}
+                    onKeyPress={inputNumber}
+                    minLength="10"
+                    maxLength="13"
+                  />
+                </div>
 
-              {noTelp === "" ? (
-                <button disabled className={` btn bg-secondary ${styles["login-btn-off"]}`}>
-                  <p className={` ${styles["login-text-disabled"]}`}>Phone Number</p>
-                </button>
-              ) : (
-                <button type="submit" className={` btn bg-primary ${styles["login-btn"]}`}>
-                  <p className={` ${styles["login-text"]}`}>Edit Phone Number</p>
-                </button>
-              )}
-            </form>
+                {noTelp === "" ? (
+                  <button disabled className={` btn bg-secondary ${styles["login-btn-off"]}`}>
+                    <p className={` ${styles["login-text-disabled"]}`}>Phone Number</p>
+                  </button>
+                ) : (
+                  <button type="submit" className={` btn bg-primary ${styles["login-btn"]}`}>
+                    <p className={` ${styles["login-text"]}`}>Edit Phone Number</p>
+                  </button>
+                )}
+              </form>
+            </div>
           </div>
         </div>
       </div>

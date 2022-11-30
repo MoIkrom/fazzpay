@@ -202,7 +202,9 @@ function index() {
 
             <div className={btnsave ? "d-none" : `${styles.profile_edit}`} onClick={handleSaveShow}>
               {/* <i className="fa-solid fa-pencil"></i> */}
-              <label htmlFor="file">Edit</label>
+              <label className={`${styles["cursor"]}`} htmlFor="file">
+                Edit
+              </label>
               <input type="file" name="file" id="file" onChange={inputImage} className="d-none" />
             </div>
             <div className={btnsave ? `${styles.profile_button}` : "d-none"}>
@@ -269,7 +271,7 @@ function index() {
           </Modal.Footer>
         </Modal>
       </div>
-
+      <ToastContainer />
       <Footer />
     </>
   );

@@ -10,13 +10,13 @@
 }
 
 .person {
-  width: 300px;
+  width: 350px;
 }
 .desc-1 {
   font-size: 14px;
   font-family: Nunito Sans;
   color: #7a7886;
-  padding-top: 20px;
+  padding-top: 30px;
 }
 .title {
   font-size: 12px;
@@ -40,6 +40,17 @@
   justify-content: space-between;
   align-items: center;
 }
+.login-text-disabled {
+  color: #66626267 !important;
+  font-family: Nunito Sans;
+  font-style: bold;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 30px;
+  line-height: 170%;
+  fill: Solid;
+  margin: 0px;
+}
 .manage {
   font-family: Nunito Sans;
   color: #6379f4;
@@ -51,13 +62,6 @@
   cursor: pointer;
 }
 
-.cont-password {
-  /* width: 400px; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 .email {
   background: none;
   border-top: none;
@@ -66,7 +70,6 @@
   border-radius: 0px;
   color: #ced4da;
 }
-
 .border-input {
   border-top: none;
   border-right: none;
@@ -79,22 +82,6 @@
 .border-input:focus {
   box-shadow: none;
   background-color: none;
-}
-
-.login-btn {
-  width: 100%;
-  padding: 0px;
-  height: 3rem;
-  background-color: #6379f4;
-  font-family: Nunito Sans;
-  font-style: bold;
-  font-size: 18px;
-  line-height: 30px;
-  line-height: 170%;
-  fill: Solid;
-  color: #ffffff;
-  position: relative;
-  top: 1rem;
 }
 .eyeslash {
   color: #706f6f;
@@ -132,16 +119,20 @@
   top: 1rem;
   cursor: pointer;
 }
-.login-text-disabled {
-  color: #66626267 !important;
+.login-btn {
+  width: 100%;
+  padding: 0px;
+  height: 3rem;
+  background-color: #6379f4;
   font-family: Nunito Sans;
   font-style: bold;
   font-size: 18px;
-  font-weight: 700;
   line-height: 30px;
   line-height: 170%;
   fill: Solid;
-  margin: 0px;
+  color: #ffffff;
+  position: relative;
+  top: 1rem;
 }
 .login-btn:hover {
   width: 100%;
@@ -159,6 +150,21 @@
   margin: 0px;
 }
 
-.cont-up {
-  padding-bottom: 7rem;
+.cont-password {
+  width: 400px;
+}
+
+.cont-pin {
+  display: flex !important;
+  justify-content: center !important;
+  position: relative;
+  top: 3rem;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.pin-column {
+  width: 400px;
+  position: relative !important;
+  top: -20px !important;
 }
