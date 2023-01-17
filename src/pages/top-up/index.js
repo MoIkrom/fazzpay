@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/header/index";
-import Sidebar from "../../components/sidebar/index";
+import Header from "../../components/Header/Header";
+import Sidebar from "../../components/sidebar/Sidebar";
 import styles from "../top-up/topUp.module.css";
 import Image from "next/image";
 import axios from "axios";
@@ -10,10 +10,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 // import { useRouter } from "next/router";
-import Footer from "../../components/footer/index";
+import Footer from "../../components/Footer/Footer";
 import Layout from "../../components/layout/Layout";
 
-function index() {
+function Topup() {
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -47,7 +47,7 @@ function index() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [firstName, lastName, phoneNumber]);
 
   return (
     <>
@@ -80,4 +80,4 @@ function index() {
   );
 }
 
-export default index;
+export default Topup;

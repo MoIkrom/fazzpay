@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import css from "../../../styles/transfer/TransferSuccess.module.css";
-import Header from "../../../components/Header/index";
-import Footer from "../../../components/Footer/index";
+import Header from "../../../components/Header/Header";
+import Footer from "../../../components/Footer/Footer";
 import Sidebar from "../../../components/Sidebar/sidebar";
 
 import checklist from "../../../assets/transferSuccess/success.png";
@@ -22,6 +22,7 @@ function TransferSuccess() {
   const profile = useSelector((state) => state.auth.profile);
   const dispatch = useDispatch();
   const router = useRouter();
+  const [balance, setBalance] = useState("");
 
   const [data, setData] = useState({});
 
@@ -42,6 +43,23 @@ function TransferSuccess() {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    console.log(balance);
+    const token = Cookies.get("token");
+    const user_id = Cookies.get("id");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    axios
+      .get(`https://fazzpay-rose.vercel.app/user/profile/${user_id}`, {
+        balance,
+      })
+      .then((response) => {
+        setBalance(response.data.data.balance);
+        setIsLoadingB(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [balance]);
 
   const transactionDate = () => {
     const arrbulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
@@ -97,7 +115,7 @@ function TransferSuccess() {
               <div className={`${css.box}`}>
                 <span>
                   <div className={`${css.tittleBox}`}>Balance Left</div>
-                  <div className={`${css.detailBox}`}>{costing(profile.balance - transactions.amount)}</div>
+                  <div className={`${css.detailBox}`}>{costing(balance - transactions.amount)}</div>
                 </span>
               </div>
               <div className={`${css.box}`}>

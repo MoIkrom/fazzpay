@@ -16,7 +16,7 @@ import registerActions from "../../redux/actions/register";
 // Import Image
 import hp from "../../assets/phone-login.png";
 
-function register() {
+function Register() {
   const router = useRouter();
   const dispacth = useDispatch();
 
@@ -160,4 +160,4 @@ function register() {
   );
 }
 
-export default register;
+export default Register;

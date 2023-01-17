@@ -12,7 +12,7 @@ import { toast, ToastContainer } from "react-toastify";
 // Import Image
 import hp from "../../assets/phone-login.png";
 
-function forgotPassword() {
+function ForgotPassword() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -97,4 +97,4 @@ function forgotPassword() {
   );
 }
 
-export default forgotPassword;
+export default ForgotPassword;

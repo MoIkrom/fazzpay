@@ -6,8 +6,8 @@ import styles from "../../../styles/transfer/Confirmation.module.css";
 
 //import components
 import Image from "next/image";
-import Header from "../../../components/header/index";
-import Footer from "../../../components/footer/index";
+import Header from "../../../components/header/Header";
+import Footer from "../../../components/footer/Footer";
 import Sidebar from "../../../components/sidebar/sidebar";
 
 //import image
@@ -34,16 +34,19 @@ function Confirmation() {
   const [lastname, setLastname] = useState("");
   const [phone, setPhone] = useState("");
 
+  const [balance, setBalance] = useState("");
+
   useEffect(() => {
     const getToken = Cookies.get("token");
+    // console.log("ini redux balance " + profile.balance);
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profile/${transactions.receiverId}`, {
+      .get(`https://fazzpay-rose.vercel.app/user/profile/${transactions.receiverId}`, {
         headers: {
           Authorization: `Bearer ${getToken}`,
         },
       })
       .then((res) => {
-        setImage(`${process.env.CLOUD}${res.data.data.image}`);
+        setImage(`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${res.data.data.image}`);
         setFirstname(res.data.data.firstName);
         setLastname(res.data.data.lastName);
         setPhone(res.data.data.noTelp);
@@ -51,17 +54,36 @@ function Confirmation() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  });
   useEffect(() => {
+    console.log(balance);
+    const token = Cookies.get("token");
+    const user_id = Cookies.get("id");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    axios
+      .get(`https://fazzpay-rose.vercel.app/user/profile/${user_id}`, {
+        balance,
+      })
+      .then((response) => {
+        setBalance(response.data.data.balance);
+        // setIsLoadingB(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [balance]);
+  useEffect(() => {
+    console.log("ini Profile : " + transactions.amount);
     const getToken = Cookies.get("token");
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profile/${transactions.receiverId}`, {
+      .get(`https://fazzpay-rose.vercel.app/user/profile/${transactions.receiverId}`, {
         headers: {
           Authorization: `Bearer ${getToken}`,
         },
       })
       .then((res) => {
-        setImage(`${process.env.CLOUD}${res.data.data.image}`);
+        // setImage(`${process.env.CLOUD}${res.data.data.image}`);
+        setImage(`https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${res.data.data.image}`);
         setFirstname(res.data.data.firstName);
         setLastname(res.data.data.lastName);
         setPhone(res.data.data.noTelp);
@@ -92,11 +114,11 @@ function Confirmation() {
             },
             getToken,
             () => {
-              //   toast.success("transfer success"),
-              router.replace("/transfer/confirmation/success");
+              toast.success("transfer success"), router.replace("/transfer/confirmation/success");
             },
             () => {
-              // toast.error("transfer failed"),
+              toast.error("transfer failed");
+              console.log();
               router.replace("/transfer/confirmation/failed");
             }
           )
@@ -168,7 +190,8 @@ function Confirmation() {
             <p className={styles["title"]}>Transfer To</p>
             <div className={styles["content-user"]}>
               <div className={styles["bor-samuel"]}>
-                <Image src={image === "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/null" ? `${process.env.CLOUDINARY_LINK}` : image} alt="Image_User" width={80} height={80} className="rounded-3" />
+                <Image src={image} alt="Image_User" width={80} height={80} className="rounded-3" />
+                {/* <Image src={image === "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/null" ? `${process.env.CLOUDINARY_LINK}` : image} alt="Image_User" width={80} height={80} className="rounded-3" /> */}
                 <div className={styles["samuel"]}>
                   <p className={styles["text-samuel"]}>
                     {firstname} {lastname}
@@ -190,7 +213,7 @@ function Confirmation() {
               <div className={styles["bor-samuel"]}>
                 <div className={styles["samuel"]}>
                   <p className={styles["text-amount"]}>Balance Left</p>
-                  <p className={styles["price"]}>{costing(profile.balance)}</p>
+                  <p className={styles["price"]}>{costing(balance)}</p>
                 </div>
               </div>
             </div>

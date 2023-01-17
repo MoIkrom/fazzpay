@@ -95,7 +95,7 @@ const authReducer = (prevState = initialState, { type, payload }) => {
         isLoading: false,
         error: null,
         profile: {
-          image: `${process.env.CLOUD}${payload.data.data.image}`,
+          image: `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${payload.data.data.image}`,
           number: payload.data.data.noTelp,
           firstname: payload.data.data.firstName,
           lastname: payload.data.data.lastName,

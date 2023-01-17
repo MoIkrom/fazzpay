@@ -1,8 +1,8 @@
 import React from "react";
 
 import css from "../../../styles/transfer/TransferFailed.module.css";
-import Header from "../../../components/Header/index";
-import Footer from "../../../components/Footer/index";
+import Header from "../../../components/Header/Header";
+import Footer from "../../../components/Footer/Footer";
 import Sidebar from "../../../components/Sidebar/sidebar";
 import failed from "../../../assets/transferFailed/failed.png";
 import profile from "../../../assets/profile_transfer/profile_image.png";

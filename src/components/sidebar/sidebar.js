@@ -13,7 +13,7 @@ import user from "../../assets/user.png";
 import plus from "../../assets/plus.png";
 import logout from "../../assets/log-out.png";
 
-function index(props) {
+function Sidebar(props) {
   const router = useRouter();
   const [show, setShow] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
@@ -130,9 +130,9 @@ function index(props) {
             <Modal.Body>
               Click this Link yo will be direct to payment :
               <p>
-                <a className="modal-close" href={url} class="tooltip-test" title="Tooltip" target="_blank">
-                  {url}
-                </a>
+                {/* <a className="modal-close" href={url} class="tooltip-test" title="Tooltip" target="_blank"> */}
+                {/* {url}
+                </a> */}
               </p>
             </Modal.Body>
           </Modal>
@@ -167,4 +167,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Sidebar;

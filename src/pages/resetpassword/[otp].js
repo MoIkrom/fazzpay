@@ -12,7 +12,7 @@ import { toast, ToastContainer } from "react-toastify";
 // Import Image
 import hp from "../../assets/phone-login.png";
 
-function newPassword() {
+function NewPassword() {
   const router = useRouter();
 
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -125,4 +125,4 @@ function newPassword() {
   );
 }
 
-export default newPassword;
+export default NewPassword;

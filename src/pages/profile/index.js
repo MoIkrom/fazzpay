@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from "react";
 
 import styles from "../../styles/profile/profile.module.css";
@@ -18,9 +19,9 @@ import panah from "../../assets//arrow-right.png";
 
 // import { useRouter } from "next/router";
 import Layout from "../../components/Layout/Layout";
-import Header from "../../components/Header/index";
+import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/sidebar";
-import Footer from "../../components/Footer/index";
+import Footer from "../../components/Footer/Footer";
 import offCanvas from "../../components/offCanvas/offCanvas";
 const myLoader = ({ src, width, quality }) => {
   return `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${src}?w=${width}&q=${quality || 75}`;
@@ -83,7 +84,7 @@ function index() {
     axios
       .post(urlLogout)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
       })
       .catch((err) => {
         console.log(err);
@@ -115,8 +116,8 @@ function index() {
     const getToken = Cookies.get("token");
     const getId = Cookies.get(`id`);
     dispatch(authActions.userThunk(getToken, getId));
-    console.log(display);
-  }, []);
+    // console.log(display);
+  }, [dispatch]);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -129,12 +130,13 @@ function index() {
         setLastName(response.data.data.lastName);
         setFirstName(response.data.data.firstName);
         setPhoneNumber(response.data.data.noTelp);
-        console.log(image);
+        // console.log(image);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+  // }, [image]);
 
   // --------- Ini codingan punya Lama --------------
   // useEffect(() => {
@@ -193,7 +195,8 @@ function index() {
             /> */}
 
             {/* _------ INi Punya Lama */}
-            <Image className={`${styles["profile-picture"]}`} src={ischange ? image : image === null ? defaultImage : imageProfile} alt="/" width={90} height={90} border-radius={20} />
+            <Image className={`${styles["profile-picture"]}`} src={ischange === true ? imageProfile : defaultImage} alt="/" width={90} height={90} border-radius={20} />
+            {/* src={ischange ? image : image === null ? defaultImage : imageProfile} alt="/" width={90} height={90} border-radius={20} /> */}
 
             {/* --------------------------------- */}
 

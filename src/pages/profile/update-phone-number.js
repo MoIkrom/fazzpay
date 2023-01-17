@@ -6,11 +6,11 @@ import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
 
 import Layout from "../../components/layout/Layout";
-import Header from "../../components/header/index";
+import Header from "../../components/Header/Header";
 import Sidebar from "../../components/sidebar/sidebar";
-import Footer from "../../components/footer/index";
+import Footer from "../../components/Footer/Footer";
 
-function personalInformation() {
+function PersonalInformation() {
   const router = useRouter();
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -50,7 +50,7 @@ function personalInformation() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [email, firstName, lastName, phoneNumber]);
 
   const submitNoHp = (e) => {
     e.preventDefault();
@@ -128,4 +128,4 @@ function personalInformation() {
   );
 }
 
-export default personalInformation;
+export default PersonalInformation;

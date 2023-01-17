@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 // import profile from "../../assets/profile.jpg";
 
-function index(props) {
+function CardTransaction(props) {
   const router = useRouter();
   return (
     <div className={`${styles["cursor"]}`}>
@@ -27,4 +27,4 @@ function index(props) {
 }
 // onClick={() => props.router}
 
-export default index;
+export default CardTransaction;

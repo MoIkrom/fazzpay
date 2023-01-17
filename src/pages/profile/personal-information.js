@@ -1,12 +1,13 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/profile/personal-info.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 
 import Layout from "../../components/Layout/Layout";
-import Header from "../../components/Header/index";
+import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/sidebar";
-import Footer from "../../components/Footer/index";
+import Footer from "../../components/Footer/Footer";
 import Cookies from "js-cookie";
 
 function personalInformation() {
@@ -44,7 +45,7 @@ function personalInformation() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [email, firstName, lastName, phoneNumber]);
 
   return (
     <div>

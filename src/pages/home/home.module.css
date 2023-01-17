@@ -30,10 +30,13 @@
   color: #ffffff;
   margin-bottom: 8px;
 }
+
+/* Start Modal */
 .title-topUp {
   position: relative;
   left: 4.7rem;
 }
+
 .inputs {
   width: 300px;
   height: 60px;
@@ -42,6 +45,13 @@
   position: relative;
   left: 6rem;
 }
+
+/* End Modal */
+
+.submits {
+  border: none !important;
+}
+
 .loader-balance {
   color: #ffffff;
   position: relative;

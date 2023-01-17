@@ -1,19 +1,23 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header/index";
-import Sidebar from "../../components/Sidebar/sidebar";
+import Header from "../../components/Header/Header";
+import Sidebar from "../../components/Sidebar/Sidebar";
 import styles from "../home/home.module.css";
 import Image from "next/image";
-import Transaction from "../../components/Card_transaction/index";
+import Transaction from "../../components/Card_transaction/CardTransaction";
 
 import transfer from "../../assets/transfer.png";
 import topUp from "../../assets/topUp.png";
 import axios from "axios";
 import Cookies from "js-cookie";
 
+import authActions from "../../redux/actions/auth";
+import { useDispatch, useSelector } from "react-redux";
+
 import { useRouter } from "next/router";
-import Footer from "../../components/Footer/index";
+import Footer from "../../components/Footer/Footer";
 import Layout from "../../components/Layout/Layout";
-import Loader from "../../components/Loader/index";
+import Loader from "../../components/Loader/Loader";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import defaultImage from "../../assets/profile.jpg";
@@ -32,11 +36,12 @@ function index() {
   const [balance, setBalance] = useState("");
   const [show, setShow] = useState(false);
   const [amount, setAmount] = useState("");
-  const [isCreated, setIsCreated] = useState(false);
   const [url, setUrl] = useState("");
+  const [isCreated, setIsCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingB, setIsLoadingB] = useState(true);
-
+  const dispatch = useDispatch();
+  const profile = useSelector((state) => state.auth.profile);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -45,8 +50,16 @@ function index() {
       event.preventDefault();
     }
   };
-
+  // useEffect(() => {
+  //   // if(getToken)
+  //   console.log(profile);
+  //   const getToken = Cookies.get("token");
+  //   const getId = Cookies.get(`id`);
+  //   dispatch(authActions.userThunk(getToken, getId));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
   useEffect(() => {
+    console.log(balance);
     const token = Cookies.get("token");
     const user_id = Cookies.get("id");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -71,7 +84,7 @@ function index() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [firstName, lastName, phoneNumber, balance]);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -121,10 +134,10 @@ function index() {
     axios
       .post(`https://fazzpay-rose.vercel.app/transaction/top-up`, { amount, url })
       .then((response) => {
-        setIsCreated(true);
+        // setIsCreated(true);
         openInNewTab(response.data.data.redirectUrl);
         setShow(false);
-        // console.log(response.data.data.redirectUrl);
+        console.log(response.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -161,6 +174,7 @@ function index() {
                   ) : (
                     <div>
                       <p className={` text-white  ${styles["balance"]}`}>Balance</p>
+                      {/* <h1 className={` fw-bold text-white  ${styles["balance"]}`}> {`${"IDR"} ${costing(profile.balance)}`}</h1> */}
                       <h1 className={` fw-bold text-white  ${styles["balance"]}`}> {`${"IDR"} ${costing(balance)}`}</h1>
                     </div>
                   )}
@@ -239,7 +253,7 @@ function index() {
           <input type="text" className={`${styles["inputs"]} form-control form-control-sm validate ml-0`} onKeyPress={inputNumber} onChange={handleAmount} />
 
           <Modal.Footer>
-            <Button variant="primary" className="fw-bold text-bg-secondary text-white" onClick={handleSubmit}>
+            <Button variant="primary" className={"fw-bold text-bg-secondary text-white"} onClick={handleSubmit}>
               submit
             </Button>
           </Modal.Footer>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header/index";
+import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/sidebar";
 import styles from "../home/history.module.css";
 import Image from "next/image";
-import Transaction from "../../components/Card_transaction/index";
+import Transaction from "../../components/Card_transaction/CardTransaction";
 import Dropdown from "react-bootstrap/Dropdown";
 import SSRProvider from "react-bootstrap/SSRProvider";
 
@@ -12,13 +12,13 @@ import topUp from "../../assets/topUp.png";
 import axios from "axios";
 
 import { useRouter } from "next/router";
-import Footer from "../../components/Footer/index";
+import Footer from "../../components/Footer/Footer";
 import Layout from "../../components/Layout/Layout";
-import Loader from "../../components/Loader/index";
+import Loader from "../../components/Loader/Loader";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function history() {
+function History() {
   const router = useRouter();
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -63,7 +63,7 @@ function history() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [firstName, lastName, phoneNumber]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -170,4 +170,4 @@ function history() {
   );
 }
 
-export default history;
+export default History;

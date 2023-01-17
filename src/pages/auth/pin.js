@@ -14,7 +14,7 @@ import { toast, ToastContainer } from "react-toastify";
 // Import Image
 import hp from "../../assets/phone-login.png";
 
-function pin() {
+function Pin() {
   const router = useRouter();
 
   const [pin, setPin] = useState({
@@ -118,4 +118,4 @@ function pin() {
   );
 }
 
-export default pin;
+export default Pin;

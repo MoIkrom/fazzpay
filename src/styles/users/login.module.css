@@ -103,24 +103,12 @@
   box-shadow: none;
   background-color: none;
 }
-.login-btn {
-  width: 100%;
-  padding: 0px;
-  height: 3rem;
-  background-color: #6379f4;
-  font-family: Nunito Sans;
-  font-style: bold;
-  font-size: 18px;
-  line-height: 30px;
-  line-height: 170%;
-  fill: Solid;
-  color: #ffffff;
-  position: relative;
-  top: 1rem;
-}
+
 .eyeslash {
   color: #706f6f;
 }
+
+/* Start Button disable */
 
 .login-btn-off {
   background-color: #dadada52 !important;
@@ -165,6 +153,21 @@
   fill: Solid;
   margin: 0px;
 }
+.login-btn {
+  width: 100%;
+  padding: 0px;
+  height: 3rem;
+  background-color: #6379f4;
+  font-family: Nunito Sans;
+  font-style: bold;
+  font-size: 18px;
+  line-height: 30px;
+  line-height: 170%;
+  fill: Solid;
+  color: #ffffff;
+  position: relative;
+  top: 1rem;
+}
 .login-btn:hover {
   width: 100%;
   background-color: #6379f4;
@@ -180,6 +183,8 @@
   color: #ffffff;
   margin: 0px;
 }
+
+/* End Button Disable */
 
 .forgot {
   color: rgba(58, 61, 66, 0.8);

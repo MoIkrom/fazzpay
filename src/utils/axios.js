@@ -28,7 +28,7 @@ export const logout = (token) => {
 };
 
 export const transactions = (body, token) => {
-  return axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/transaction/transfer`, body, {
+  return axios.post(`https://fazzpay-rose.vercel.app/transaction/transfer`, body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

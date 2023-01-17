@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import css from "../../styles/transfer/Transfer.module.css";
@@ -6,12 +7,12 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Image from "next/image";
 
-import Footer from "../../components/Footer/index";
+import Footer from "../../components/Footer/Footer";
 import Layout from "../../components/Layout/Layout";
-import Header from "../../components/Header/index";
+import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/sidebar";
-import Receiver from "../../components/Receiver/index";
-import Loader from "../../components/Loader/index";
+import Receiver from "../../components/Receiver/Receiver";
+import Loader from "../../components/Loader/Loader";
 
 import search from "../../assets/search.png";
 
@@ -23,6 +24,7 @@ function index() {
 
   const searchHandler = (e) => {
     setSearch(e.target.value);
+    console.log(data);
   };
 
   useEffect(() => {
@@ -100,7 +102,11 @@ function index() {
                           key={index}
                           firstName={data.firstName}
                           lastName={data.lastName}
-                          images={data.images === null || data.images === undefined ? `${process.env.CLOUDINARY_LINK}` : `${process.env.CLOUD}${data.image}`}
+                          image={
+                            data.image === null || data.image === undefined
+                              ? `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/Fazzpay/example_qx2pf0.png`
+                              : `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${data.image}`
+                          }
                           noTelp={data.noTelp}
                           id={data.id}
                         />

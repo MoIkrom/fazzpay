@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import css from "../../styles/transfer/TransferDetail.module.css";
 
 // import components
-import Header from "../../components/header/index";
-import Footer from "../../components/footer/index";
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 import Sidebar from "../../components/sidebar/sidebar";
 
 import CardProfileTransfer from "../../components/card_profile_transfer/ProfileTransfer";
@@ -33,7 +33,7 @@ function TransferID() {
   useEffect(() => {
     const getToken = Cookies.get("token");
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profile/${router.query.iduser}`, {
+      .get(`https://fazzpay-rose.vercel.app/user/profile/${router.query.iduser}`, {
         headers: {
           Authorization: `Bearer ${getToken}`,
         },
@@ -44,7 +44,7 @@ function TransferID() {
       .catch((err) => {
         toast.error(err.response.data.msg);
       });
-  }, []);
+  }, [router.query.iduser]);
 
   const valuePrice = (e) => {
     if (e.target.value.length === 0) setPrice("");
@@ -73,7 +73,7 @@ function TransferID() {
           amount: price,
           notes: note,
         },
-        () => (toast.success("Confirmation Payment"), router.push("/transfer/confirmation")),
+        () => router.push("/transfer/confirmation"),
         () => toast.error(ErrorMessage)
       )
     );
@@ -95,9 +95,9 @@ function TransferID() {
               <CardProfileTransfer
                 key={data.id}
                 idUser={data.id}
-                // images={data.image === null ? `${process.env.CLOUDINARY_LINK}` : `${process.env.CLOUD}${data.image}`}
+                images={data.image === null ? `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/Fazzpay/example_qx2pf0.png` : `https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/${data.image}`}
                 name={data.firstName}
-                noTelp={data.noTelp === null ? "Phone number empty" : data.number}
+                noTelp={data.noTelp === null ? "Phone number empty" : data.noTelp}
               />
 
               <p className={css.type_amount}>Type the amount you want to transfer and then press continue to the next steps.</p>

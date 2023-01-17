@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import Image from "next/image";
 import styles from "./receiver.module.css";

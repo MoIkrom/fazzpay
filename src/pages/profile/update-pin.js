@@ -4,14 +4,14 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 import Layout from "../../components/Layout/Layout";
-import Header from "../../components/Header/index";
+import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/sidebar";
-import Footer from "../../components/Footer/index";
+import Footer from "../../components/Footer/Footer";
 import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
 import PinInput from "../../components/PinInput/pinInput";
 
-function updatePassword() {
+function UpdatePassword() {
   const router = useRouter();
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -139,7 +139,7 @@ function updatePassword() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [firstName, lastName, phoneNumber]);
 
   return (
     <div>
@@ -204,4 +204,4 @@ function updatePassword() {
   );
 }
 
-export default updatePassword;
+export default UpdatePassword;

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/header/index";
+import Header from "../../components/Header/Header";
 import Sidebar from "../../components/sidebar/sidebar";
 import styles from "../home/home.module.css";
 import Image from "next/image";
-import Transaction from "../../components/card_transaction/index";
+// import Transaction from "../../components/Card_transaction/";
 
 // import defaultImage from "../../public/profile.jpg";
 import axios from "axios";
 
 import { useRouter } from "next/router";
-import Footer from "../../components/footer/index";
+import Footer from "../../components/Footer/Footer";
 import Layout from "../../components/layout/Layout";
 
-function index() {
+function Amount() {
   const router = useRouter();
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -44,7 +44,7 @@ function index() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [firstName, lastName, phoneNumber]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -106,4 +106,4 @@ function index() {
   );
 }
 
-export default index;
+export default Amount;
